@@ -3,7 +3,6 @@ import TimeSeries from 'app/core/time_series2';
 // import moment from 'moment';
 // import './external/moment-duration-format';
 import _ from 'lodash';
-import './css/epict-panel.css!';
 import { scaleQuantize } from 'd3';
 
 const panelDefaults = {

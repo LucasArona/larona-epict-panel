@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', './css/epict-panel.css!', 'd3'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], function (_export, _context) {
   "use strict";
 
   var MetricsPanelCtrl, TimeSeries, _, scaleQuantize, _createClass, panelDefaults, EpictCtrl;
@@ -42,7 +42,7 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', './css/ep
       TimeSeries = _appCoreTime_series.default;
     }, function (_lodash) {
       _ = _lodash.default;
-    }, function (_cssEpictPanelCss) {}, function (_d) {
+    }, function (_d) {
       scaleQuantize = _d.scaleQuantize;
     }],
     execute: function () {
