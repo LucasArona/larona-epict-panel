@@ -9,8 +9,8 @@ You can easily show values on complex diagrams, or infrastructure picture for ex
 
 Fill-in the Background URL with the image that you want to use, then, create some boxes and move them on your image.
 
-#### Changelog
+## Changelog
 
-##### v1.0.0
+### v1.0.0
 
 - First release
