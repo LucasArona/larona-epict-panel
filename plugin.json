@@ -1,0 +1,29 @@
+{
+  "type": "panel",
+  "name": "epict Panel",
+  "id": "larona-epict-panel",
+
+  "info": {
+    "description": "Enter the URL of the image you want, and add some metrics on it.",
+    "author": {
+      "name": "larona",
+      "url": "https://github.com/LucasArona/larona-epict-panel"
+    },
+    "keywords": ["picture", "panel","epict","external","image"],
+    "logos": {
+      "small": "src/img/epict_panel_logo.png",
+      "large": "src/img/epict_panel_logo.png"
+    },
+    "links": [
+      {"name": "Project site", "url": "https://github.com/LucasArona/larona-epict-panel"},
+      {"name": "MIT License", "url": "https://github.com/LucasArona/larona-epict-panel/blog/MASTER/LICENSE"}
+    ],
+    "version": "0.0.1",
+    "updated": "2018-11-10"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "5.x.x",
+    "plugins": [ ]
+  }
+}

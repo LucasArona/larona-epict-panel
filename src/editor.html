@@ -1,0 +1,82 @@
+<div class="editor-row">
+	<div class="section gf-form-group">
+		<h5 class="section-heading">ePict Options</h5>
+		<div class="gf-form">
+				<label class="gf-form-label width-10">Background URL</label>
+				<span>
+					<input type="text" class="input-small gf-form-input" placeholder="URL" ng-model="ctrl.panel.bgURL" ng-change="ctrl.render()" ng-model-onblur />
+				</span>
+		</div>
+	</div>
+
+	<div class="section gf-form-group">
+		<h5 class="section-heading">Boxes definitions</h5>
+		<div ng-repeat="box in ctrl.panel.boxes track by $index">
+				<div class="section gf-form-group">
+					<span class="btn btn-danger gf-form-button" ng-click="ctrl.deleteBox($index);ctrl.render()" type="button">
+						<i class="fa fa-trash" ></i>
+					</span>
+				</div>
+				<div class="section gf-form-group">
+					<h5 class="section-heading">Metric</h5>
+					<div class="gf-form">				
+						<label class="gf-form-label width-4">Name</label>
+						<input type="text" class="input-small gf-form-input " ng-model="box.serie" ng-change="ctrl.render()" ng-model-onblur />
+					</div>
+					<div class="gf-form">				
+							<label class="gf-form-label width-4">Suffix</label>
+							<input type="text" class="input-small gf-form-input " ng-model="box.suffix" ng-change="ctrl.render()" ng-model-onblur />
+					</div>
+				</div>
+				<div class="section gf-form-inline">
+						<h5 class="section-heading">Position</h5>
+						<div class="gf-form-inline">
+							<div class="gf-form">				
+								<label class="gf-form-label width-5">X
+									<info-popover mode="right-normal">
+										<p>
+											You can easily find the coordinates by closing the Edit pane
+											and <code>ctrl</code>+<code>left click</code>
+											anywhere on your image
+										</p>
+									</info-popover>
+								</label>
+								<input type="text" class="gf-form-input width-5" ng-model="box.xpos" ng-change="ctrl.render()" ng-model-onblur />
+							</div>
+							<div class="gf-form">				
+									<label class="gf-form-label width-2">Y</label>
+									<input type="text" class="gf-form-input width-5" ng-model="box.ypos" ng-change="ctrl.render()" ng-model-onblur />
+							</div>
+	
+						</div>
+						<h5 class="section-heading">Appearance</h5>
+						<div class="gf-form-inline">
+							<div class="gf-form">
+								<label class="gf-form-label width-4">
+									Color
+								</label>
+								<span class="max-width-5">
+									<spectrum-picker class="gf-form-input" ng-model="box.color" ng-change="ctrl.render()" ></spectrum-picker>
+								</span>
+							</div>
+							
+							<div class="gf-form">				
+									<label class="gf-form-label width-6">Font-size</label>
+									<input type="text" class="input-small gf-form-input width-5" ng-model="box.fontsize" ng-change="ctrl.render()" ng-model-onblur />
+							</div>
+							<div class="gf-form">				
+									<label class="gf-form-label width-6">Decimal</label>
+									<input type="text" class="input-small gf-form-input width-5" ng-model="box.decimal" ng-change="ctrl.render()" ng-model-onblur />
+							</div>
+						</div>
+					</div>
+		</div>
+		<div class="editor-row">
+				<div class="gf-form-button">
+					<button class="btn btn-inverse" ng-click="ctrl.addBox();ctrl.render()">
+					<i class="fa fa-plus"></i>&nbsp;Add a box
+					</button>
+				</div>
+		</div>
+	</div>
+</div>

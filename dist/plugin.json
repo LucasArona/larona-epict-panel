@@ -1,0 +1,29 @@
+{
+  "type": "panel",
+  "name": "epict Panel",
+  "id": "larona-epict-panel",
+
+  "info": {
+    "description": "-",
+    "author": {
+      "name": "Lucas Arona",
+      "url": "https://grafana.com"
+    },
+    "keywords": ["clock", "panel"],
+    "logos": {
+      "small": "src/img/clock_panel_logo.svg",
+      "large": "src/img/clock_panel_logo.svg"
+    },
+    "links": [
+      {"name": "Project site", "url": "https://github.com/LucasArona/larona-epict-panel"},
+      {"name": "MIT License", "url": "https://github.com/LucasArona/larona-epict-panel/blog/MASTER/LICENSE"}
+    ],
+    "version": "0.0.1",
+    "updated": "2018-05-11"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "5.x.x",
+    "plugins": [ ]
+  }
+}
