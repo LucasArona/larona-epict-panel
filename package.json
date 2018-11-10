@@ -16,12 +16,15 @@
   "author": "larona",
   "license": "MIT",
   "devDependencies": {
-    
+    "babel-cli": ">=6.26.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-transform-es2015-modules-systemjs": "^7.0.0-beta.3",
+    "babel-preset-es2015": "^7.0.0-beta.3",
     "eslint": "^2.5.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "grunt": "^1.0.3",
-   
+    "grunt-babel": "^8.0.0",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^4.0.0",
