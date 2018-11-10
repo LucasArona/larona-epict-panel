@@ -25,7 +25,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "grunt": "^1.0.3",
-    "grunt-babel": "^8.0.0",
+    "grunt-babel": "^7.0.0",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^4.0.0",
