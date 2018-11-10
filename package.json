@@ -17,6 +17,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": ">=6.26.0",
+    "babel-core": ">=6.26.3",
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-es2015-modules-systemjs": "^7.0.0-beta.3",
     "babel-preset-es2015": "^7.0.0-beta.3",
