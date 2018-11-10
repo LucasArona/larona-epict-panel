@@ -1,7 +1,5 @@
 import {MetricsPanelCtrl} from 'app/plugins/sdk';
 import TimeSeries from 'app/core/time_series2';
-// import moment from 'moment';
-// import './external/moment-duration-format';
 import _ from 'lodash';
 import { scaleQuantize } from 'd3';
 
@@ -29,7 +27,6 @@ export class EpictCtrl extends MetricsPanelCtrl {
   }
 
   onPanelTeardown() {
-    // this.$timeout.cancel(this.nextTickPromise);
   }
 
   onDataReceived(panelData) {
@@ -53,7 +50,6 @@ export class EpictCtrl extends MetricsPanelCtrl {
       // alert(wantedSerie[0].datapoints[wantedSerie.length-1]);
     }); 
     this.render();
-    // this.$timeout.cancel(this.nextTickPromise);
   }
 
   onDataSnapshotLoad(snapshotData) {
