@@ -42,7 +42,7 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', './css/ep
       TimeSeries = _appCoreTime_series.default;
     }, function (_lodash) {
       _ = _lodash.default;
-    }, function (_cssClockPanelCss) {}, function (_d) {
+    }, function (_cssEpictPanelCss) {}, function (_d) {
       scaleQuantize = _d.scaleQuantize;
     }],
     execute: function () {
@@ -91,7 +91,7 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', './css/ep
         _createClass(EpictCtrl, [{
           key: 'onInitEditMode',
           value: function onInitEditMode() {
-            this.addEditorTab('Options', 'public/plugins/lucasarona-epict-panel/editor.html', 2);
+            this.addEditorTab('Options', 'public/plugins/larona-epict-panel/editor.html', 2);
           }
         }, {
           key: 'onPanelTeardown',
