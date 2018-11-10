@@ -26,7 +26,7 @@ export class EpictCtrl extends MetricsPanelCtrl {
   }
 
   onInitEditMode() {
-    this.addEditorTab('Options', 'public/plugins/lucasarona-epict-panel/editor.html', 2);
+    this.addEditorTab('Options', 'public/plugins/larona-epict-panel/editor.html', 2);
   }
 
   onPanelTeardown() {
