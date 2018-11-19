@@ -11,7 +11,7 @@ Enter the URL of the image you want, and add some metrics.
 
 #### Background URL
 
-Enter the URL of the image over which you want to display metrics. For example: http://webSrv1/datacenter-network.jpg
+Enter the URL of the image over which you want to display metrics.
 
 #### Boxes definitions
 
