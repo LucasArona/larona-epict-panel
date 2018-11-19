@@ -95,9 +95,7 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
           }
         }, {
           key: 'onPanelTeardown',
-          value: function onPanelTeardown() {
-            // this.$timeout.cancel(this.nextTickPromise);
-          }
+          value: function onPanelTeardown() {}
         }, {
           key: 'onDataReceived',
           value: function onDataReceived(panelData) {
@@ -121,7 +119,6 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
               // alert(wantedSerie[0].datapoints[wantedSerie.length-1]);
             });
             this.render();
-            // this.$timeout.cancel(this.nextTickPromise);
           }
         }, {
           key: 'onDataSnapshotLoad',

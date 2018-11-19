@@ -16,9 +16,9 @@
     },
     "links": [
       {"name": "Project site", "url": "https://github.com/LucasArona/larona-epict-panel"},
-      {"name": "MIT License", "url": "https://github.com/LucasArona/larona-epict-panel/blog/MASTER/LICENSE"}
+      {"name": "MIT License", "url": "https://github.com/LucasArona/larona-epict-panel/blob/master/LICENSE"}
     ],
-    "version": "0.0.1",
+    "version": "1.0.0",
     "updated": "2018-11-10"
   },
 
