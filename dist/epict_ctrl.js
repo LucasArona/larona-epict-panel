@@ -110,7 +110,10 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
                 return oneSerie.alias == box.serie;
               });
               if (wantedSerie != null && wantedSerie[0] != null) {
-                box.text = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0];
+                var nf = new Intl.NumberFormat();
+                var numberBeforeFormatting = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
+                var formattedNumber = nf.format(numberBeforeFormatting);
+                box.text = formattedNumber;
               } else {
                 box.text = "N/A";
               }

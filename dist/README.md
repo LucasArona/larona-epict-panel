@@ -19,7 +19,7 @@ The boxes contains the data you want to show over the background image.
 
 When you add a box, you have to set the **Metric Name** first (by default: "A-Series"), this value must match the name of the query you want to display in this box.
 
-For example, if you want to show the value of the query "B" (that you created in "Metrics" tab), set this field to "B-Series".
+For example, if you want to show the value of the query "B" (that you created in "Metrics" tab), set this field to "B-Series". You can also use the "Alias" that you may have defined in your query.
 
 If you want, you can add a **Suffix** that will be appended after the value on your image.
 
@@ -31,3 +31,7 @@ Note that you can Ctrl-Click anywhere on the image, and a popup will show you th
 ### v1.0.0
 
 - First release
+
+### v1.0.1
+
+- Fix: Decimal separator now correctly localized

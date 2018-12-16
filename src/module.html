@@ -2,6 +2,6 @@
   <div id="img-wrapper" style="position:relative;">
       <img src={{ctrl.panel.bgURL}} ng-click="ctrl.clicktest($event)"/>
       <span ng-repeat="box in ctrl.panel.boxes track by $index"
-      style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:{{box.fontsize}}px">{{box.text|number:box.decimal}}{{box.suffix}}</span>
+      style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:{{box.fontsize}}px">{{box.text}}{{box.suffix}}</span>
   </div>
 </div>

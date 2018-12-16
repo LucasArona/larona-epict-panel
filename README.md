@@ -31,3 +31,7 @@ Note that you can Ctrl-Click anywhere on the image, and a popup will show you th
 ### v1.0.0
 
 - First release
+
+### v1.0.1
+
+- Fix: Decimal separator now correctly localized
