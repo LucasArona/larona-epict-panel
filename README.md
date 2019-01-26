@@ -38,7 +38,7 @@ The **Use thresholds** checkbox allows you to specify different colors based on 
 
 ### v1.0.1
 
-- Fix: Decimal separator now correctly localizedi
+- Fix: Decimal separator now correctly localized
 
 ### v1.1.0
 
