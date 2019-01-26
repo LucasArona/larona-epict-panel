@@ -19,7 +19,7 @@ export class EpictCtrl extends MetricsPanelCtrl {
     this.events.on('data-received', this.onDataReceived.bind(this));
     this.events.on('data-snapshot-load', this.onDataSnapshotLoad.bind(this));
     this.events.on('panel-initialized', this.render.bind(this));
-
+    this.events.on('render',this.render.bind(this));
   }
 
   onInitEditMode() {
@@ -27,6 +27,36 @@ export class EpictCtrl extends MetricsPanelCtrl {
   }
 
   onPanelTeardown() {
+  }
+
+  render(){
+	this.scope.ctrl.panel.boxes.forEach(function(box){
+		if(box.usingThresholds==true){
+        		if(box.rawValue <=parseInt(box.thresholds.split(',')[0])){
+				box.color=box.colorLow;
+				if(box.blinkLow){
+					box.isBlinking=true
+				}else{
+					box.isBlinking=false;
+				}
+			}else if(box.rawValue >=parseInt(box.thresholds.split(',')[1])){
+				box.color=box.colorHigh;
+				if(box.blinkHigh){
+					box.isBlinking=true
+				}else{
+					box.isBlinking=false;
+				}
+			}else{
+				box.color=box.colorMedium
+				box.isBlinking=false;
+			}
+			//alert(box.rawValue);
+		}else{
+			box.isBlinking=false;
+		}
+	});
+	
+//	alert("yes");
   }
 
   onDataReceived(panelData) {
@@ -39,16 +69,16 @@ export class EpictCtrl extends MetricsPanelCtrl {
      var wantedSerie = this.series.filter(function (oneSerie) {
         return oneSerie.alias == box.serie;
       });
-      if(wantedSerie != null && wantedSerie[0]!=null)
+      if(wantedSerie != null && wantedSerie[0]!=null && wantedSerie[0].datapoints.length!=0)
       {
 	var nf = new Intl.NumberFormat();
         var numberBeforeFormatting=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
-        var formattedNumber = nf.format(numberBeforeFormatting);
+        box.rawValue=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]  //Used to determine the color if the Threshold is enabled
+	var formattedNumber = nf.format(numberBeforeFormatting);
         box.text = formattedNumber;  
       }else{
         box.text="N/A";
-      }
-     
+      } 
       // console.log(wantedSerie);
       // alert(wantedSerie[0].datapoints[wantedSerie.length-1]);
     }); 
@@ -70,7 +100,9 @@ export class EpictCtrl extends MetricsPanelCtrl {
   }
 
   addBox(){
-    this.panel.boxes.push({serie:"A-series",text:"N/A",xpos:0,ypos:0,fontsize:12,color:"#000",decimal:1});
+    this.panel.boxes.push({serie:"A-series",text:"N/A",xpos:0,ypos:0,fontsize:12,prefixSize:10,suffixSize:10,color:"#000",decimal:1,usingThresholds:false,thresholds:'20,60',colorLow:"#0f0",colorMedium:"#fa1",colorHigh:"#f00"});
+    
+    console.log(this.panel.boxes);
   }
   deleteBox($index){
      this.panel.boxes.splice($index,1);

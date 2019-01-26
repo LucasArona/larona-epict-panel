@@ -1,7 +1,28 @@
+<style type="text/css">
+.blink {
+  animation: blink_anim 0.8s linear infinite;
+}
+a,a:hover{
+	color:unset;
+}
+.hasLink{
+ cursor: pointer;
+}
+.noLink {
+ cursor: default;
+}
+@keyframes blink_anim {
+  50% {
+    opacity: 0.2;
+  }
+}
+</style>
 <div class="epict-panel" style="display:flex;justify-content:center">
   <div id="img-wrapper" style="position:relative;">
-      <img src={{ctrl.panel.bgURL}} ng-click="ctrl.clicktest($event)"/>
+    <img src={{ctrl.panel.bgURL}} ng-click="ctrl.clicktest($event)"/>
       <span ng-repeat="box in ctrl.panel.boxes track by $index"
-      style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:{{box.fontsize}}px">{{box.text}}{{box.suffix}}</span>
+      style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:{{box.fontsize}}px">
+       <a ng-href="{{box.URL}}" ng-class="box.URL?'hasLink':'noLink'"><span ng-if="box.prefix" class="boxprefix" style="margin-right:0.5ch;white-space: pre;font-size:{{box.prefixSize}}px">{{box.prefix}}</span><span ng-class="box.isBlinking?'blink':''">{{box.text}}</span><span ng-if="box.suffix" ng-class="box.isBlinking?'blink boxsuffix':'boxsuffix'" style="white-space: pre;font-size:{{box.suffixSize}}px">{{box.suffix}}</span></a>
+     </span>
   </div>
 </div>

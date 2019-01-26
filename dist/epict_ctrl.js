@@ -84,7 +84,7 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
           _this.events.on('data-received', _this.onDataReceived.bind(_this));
           _this.events.on('data-snapshot-load', _this.onDataSnapshotLoad.bind(_this));
           _this.events.on('panel-initialized', _this.render.bind(_this));
-
+          _this.events.on('render', _this.render.bind(_this));
           return _this;
         }
 
@@ -96,6 +96,37 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
         }, {
           key: 'onPanelTeardown',
           value: function onPanelTeardown() {}
+        }, {
+          key: 'render',
+          value: function render() {
+            this.scope.ctrl.panel.boxes.forEach(function (box) {
+              if (box.usingThresholds == true) {
+                if (box.rawValue <= parseInt(box.thresholds.split(',')[0])) {
+                  box.color = box.colorLow;
+                  if (box.blinkLow) {
+                    box.isBlinking = true;
+                  } else {
+                    box.isBlinking = false;
+                  }
+                } else if (box.rawValue >= parseInt(box.thresholds.split(',')[1])) {
+                  box.color = box.colorHigh;
+                  if (box.blinkHigh) {
+                    box.isBlinking = true;
+                  } else {
+                    box.isBlinking = false;
+                  }
+                } else {
+                  box.color = box.colorMedium;
+                  box.isBlinking = false;
+                }
+                //alert(box.rawValue);
+              } else {
+                box.isBlinking = false;
+              }
+            });
+
+            //	alert("yes");
+          }
         }, {
           key: 'onDataReceived',
           value: function onDataReceived(panelData) {
@@ -109,15 +140,15 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
               var wantedSerie = _this2.series.filter(function (oneSerie) {
                 return oneSerie.alias == box.serie;
               });
-              if (wantedSerie != null && wantedSerie[0] != null) {
+              if (wantedSerie != null && wantedSerie[0] != null && wantedSerie[0].datapoints.length != 0) {
                 var nf = new Intl.NumberFormat();
                 var numberBeforeFormatting = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
+                box.rawValue = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]; //Used to determine the color if the Threshold is enabled
                 var formattedNumber = nf.format(numberBeforeFormatting);
                 box.text = formattedNumber;
               } else {
                 box.text = "N/A";
               }
-
               // console.log(wantedSerie);
               // alert(wantedSerie[0].datapoints[wantedSerie.length-1]);
             });
@@ -142,7 +173,9 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
         }, {
           key: 'addBox',
           value: function addBox() {
-            this.panel.boxes.push({ serie: "A-series", text: "N/A", xpos: 0, ypos: 0, fontsize: 12, color: "#000", decimal: 1 });
+            this.panel.boxes.push({ serie: "A-series", text: "N/A", xpos: 0, ypos: 0, fontsize: 12, prefixSize: 10, suffixSize: 10, color: "#000", decimal: 1, usingThresholds: false, thresholds: '20,60', colorLow: "#0f0", colorMedium: "#fa1", colorHigh: "#f00" });
+
+            console.log(this.panel.boxes);
           }
         }, {
           key: 'deleteBox',
