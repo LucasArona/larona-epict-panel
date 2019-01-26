@@ -21,10 +21,14 @@ When you add a box, you have to set the **Metric Name** first (by default: "A-Se
 
 For example, if you want to show the value of the query "B" (that you created in "Metrics" tab), set this field to "B-Series". You can also use the "Alias" that you may have defined in your query.
 
-If you want, you can add a **Suffix** that will be appended after the value on your image.
+If you want, you can add a **Prefix** and/or **Suffix** that will be appended before/after the value on your image.
 
 The **Position** are the coordinates (X, Y) at which the value will be drawn. X:0, Y:0 is the top left corner of your image. 
 Note that you can Ctrl-Click anywhere on the image, and a popup will show you the coordinates of the point on which you clicked.
+
+If you add a link in the **URL** field, you will be able to click on the metric to follow that link.
+
+The **Use thresholds** checkbox allows you to specify different colors based on the current value of your metric. You can also choose that the value blinks when the thresholds are reached. 
 
 ## Changelog
 
@@ -35,3 +39,9 @@ Note that you can Ctrl-Click anywhere on the image, and a popup will show you th
 ### v1.0.1
 
 - Fix: Decimal separator now correctly localized
+
+### v1.1.0
+
+- New feature: You can now add a Link to your boxes.
+- New feature: Added the option to display a prefix in addition to the suffix
+- New feature: Add the thresholds feature (colors and blink)
