@@ -141,11 +141,15 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
                 return oneSerie.alias == box.serie;
               });
               if (wantedSerie != null && wantedSerie[0] != null && wantedSerie[0].datapoints.length != 0) {
-                var nf = new Intl.NumberFormat();
-                var numberBeforeFormatting = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
-                box.rawValue = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]; //Used to determine the color if the Threshold is enabled
-                var formattedNumber = nf.format(numberBeforeFormatting);
-                box.text = formattedNumber;
+                if (wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0] != null) {
+                  var nf = new Intl.NumberFormat();
+                  var numberBeforeFormatting = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
+                  box.rawValue = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]; //Used to determine the color if the Threshold is enabled
+                  var formattedNumber = nf.format(numberBeforeFormatting);
+                  box.text = formattedNumber;
+                } else {
+                  box.text = "-";
+                }
               } else {
                 box.text = "N/A";
               }
