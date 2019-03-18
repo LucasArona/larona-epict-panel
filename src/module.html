@@ -20,9 +20,17 @@ a,a:hover{
 <div class="epict-panel" style="display:flex;justify-content:center">
   <div id="img-wrapper" style="position:relative;">
     <img src={{ctrl.panel.bgURL}} ng-click="ctrl.clicktest($event)"/>
-      <span ng-repeat="box in ctrl.panel.boxes track by $index"
-      style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:{{box.fontsize}}px">
-       <a ng-href="{{box.URL}}" ng-class="box.URL?'hasLink':'noLink'"><span ng-if="box.prefix" class="boxprefix" style="margin-right:0.5ch;white-space: pre;font-size:{{box.prefixSize}}px">{{box.prefix}}</span><span ng-class="box.isBlinking?'blink':''">{{box.text}}</span><span ng-if="box.suffix" ng-class="box.isBlinking?'blink boxsuffix':'boxsuffix'" style="white-space: pre;font-size:{{box.suffixSize}}px">{{box.suffix}}</span></a>
+      <span ng-repeat="box in ctrl.panel.boxes track by $index" style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};">
+      <a ng-href="{{box.URL}}" ng-class="box.URL?'hasLink':'noLink'">
+          <div ng-if="!box.isOrb" style="font-size:{{box.fontsize}}px;">
+                <span ng-if="box.prefix" class="boxprefix" style="margin-right:0.5ch;white-space:pre;font-size:{{box.prefixSize}}px;">{{box.prefix}}</span>
+                <span ng-class="box.isBlinking?'blink':''">{{box.text}}</span>
+                <span ng-if="box.suffix" ng-class="box.isBlinking?'blink boxsuffix':'boxsuffix'" style="white-space:pre;font-size:{{box.suffixSize}}px">{{box.suffix}}</span>
+          </div>
+          <div ng-if="box.isOrb" style="font-size:0px;">
+                <span ng-class="box.isBlinking?'blink':''" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;border-radius:50%;border-style:solid;border-width:thin;border-color:#000;display:inline-block;background-color:{{box.color}};"></span>
+          </div>
+        </a>
      </span>
   </div>
 </div>

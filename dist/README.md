@@ -46,3 +46,6 @@ The **Use thresholds** checkbox allows you to specify different colors based on 
 - New feature: Added the option to display a prefix in addition to the suffix
 - New feature: Add the thresholds feature (colors and blink)
 - Bugfix: An error was displayed if the last datapoint of the serie was null
+
+### v1.2.0
+- New feature: You can now display a colored orb instead of the text

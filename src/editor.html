@@ -82,6 +82,15 @@
 						<input type="text" class="input-small gf-form-input width-6" ng-model="box.fontsize" ng-change="ctrl.render()" ng-model-onblur />
 					</div>
 											
+                </div>
+				<div class="gf-form-inline">
+					<gf-form-switch class="gf-form" label-class="width-8" label="Is Orb" checked="box.isOrb" on-change="ctrl.render()"></gf-form-switch>
+					<div ng-if="box.isOrb">
+						<div class="gf-form">
+							<label class="gf-form-label width-8">Orb Size</label>
+							<input type="text" class="input-small gf-form-input width-6" ng-model="box.orbSize" ng-change="ctrl.render()" ng-model-onblur />
+						</div>
+					</div>
 				</div>
 				<div class="gf-form-inline">
 					<gf-form-switch class="gf-form" label-class="width-8" label="Use thresholds" checked="box.usingThresholds" on-change="ctrl.render()"></gf-form-switch>
