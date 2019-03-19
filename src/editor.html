@@ -81,15 +81,27 @@
 						<label class="gf-form-label width-8">Font-size</label>
 						<input type="text" class="input-small gf-form-input width-6" ng-model="box.fontsize" ng-change="ctrl.render()" ng-model-onblur />
 					</div>
-											
-                </div>
+				</div>
 				<div class="gf-form-inline">
-					<gf-form-switch class="gf-form" label-class="width-8" label="Is Orb" checked="box.isOrb" on-change="ctrl.render()"></gf-form-switch>
-					<div ng-if="box.isOrb">
+					<gf-form-switch class="gf-form" label-class="width-8" label="Display orb" checked="box.hasOrb" on-change="ctrl.render()"></gf-form-switch>
+					<div ng-if="box.hasOrb">
 						<div class="gf-form">
 							<label class="gf-form-label width-8">Orb Size</label>
 							<input type="text" class="input-small gf-form-input width-6" ng-model="box.orbSize" ng-change="ctrl.render()" ng-model-onblur />
 						</div>
+					</div>
+				</div>
+				<div class="gf-form" ng-if="box.hasOrb">
+					<div class="gf-form-inline">
+						<gf-form-switch class="gf-form" label-class="width-8" label="Hide text" checked="box.orbHideText" on-change="ctrl.render()"></gf-form-switch>
+						<dif ng-if="!box.orbHideText">
+							<dif class="gf-form">
+								<label class="gf-form-label width-8">Orb Location</label>
+								<div class="gf-form-select-wrapper width-6">
+									<select class="input-small gf-form-input" ng-model="box.orbLocation" ng-options="t for t in ['Left', 'Right', 'Top', 'Bottom']" ng-change="ctrl.render()"></select>
+								</div>
+							</dif>
+						</dif>
 					</div>
 				</div>
 				<div class="gf-form-inline">

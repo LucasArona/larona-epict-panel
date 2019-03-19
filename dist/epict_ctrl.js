@@ -177,7 +177,7 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
         }, {
           key: 'addBox',
           value: function addBox() {
-            this.panel.boxes.push({ serie: "A-series", text: "N/A", xpos: 0, ypos: 0, fontsize: 12, prefixSize: 10, suffixSize: 10, color: "#000", decimal: 1, usingThresholds: false, thresholds: '20,60', colorLow: "#0f0", colorMedium: "#fa1", colorHigh: "#f00", isOrb: false, orbSize: "10" });
+            this.panel.boxes.push({ serie: "A-series", text: "N/A", xpos: 0, ypos: 0, fontsize: 12, prefixSize: 10, suffixSize: 10, color: "#000", decimal: 1, usingThresholds: false, thresholds: '20,60', colorLow: "#0f0", colorMedium: "#fa1", colorHigh: "#f00", hasOrb: false, orbSize: "10", orbHideText: false, orbLocation: "Left" });
 
             console.log(this.panel.boxes);
           }

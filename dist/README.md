@@ -30,6 +30,8 @@ If you add a link in the **URL** field, you will be able to click on the metric 
 
 The **Use thresholds** checkbox allows you to specify different colors based on the current value of your metric. You can also choose that the value blinks when the thresholds are reached. 
 
+When **Is Orb** is checked, the text, prefix and suffix will be replaced by an resizable orb. This orb follows the same coloring rules as the text.
+
 ## Changelog
 
 ### v1.0.0
