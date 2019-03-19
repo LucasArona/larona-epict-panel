@@ -30,7 +30,8 @@ If you add a link in the **URL** field, you will be able to click on the metric 
 
 The **Use thresholds** checkbox allows you to specify different colors based on the current value of your metric. You can also choose that the value blinks when the thresholds are reached. 
 
-When **Is Orb** is checked, the text, prefix and suffix will be replaced by an resizable orb. This orb follows the same coloring rules as the text.
+When **Has Orb** is checked, an orb can be displayed either next to the text or without the text.
+The coloring follows the same threshold rules as the metric.
 
 ## Changelog
 
@@ -50,4 +51,4 @@ When **Is Orb** is checked, the text, prefix and suffix will be replaced by an r
 - Bugfix: An error was displayed if the last datapoint of the serie was null
 
 ### v1.2.0
-- New feature: You can now display a colored orb instead of the text
+- New feature: You can now display a colored orb with the text
