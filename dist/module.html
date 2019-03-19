@@ -17,6 +17,8 @@
     border-width: thin;
     border-color: #000;
     display: inline-block;
+    font-size: 0px;
+
   }
   .alignHorizontally {
     display: inline-block;
@@ -26,6 +28,13 @@
     display: inline-block;
     white-space: normal;
     vertical-align: middle;
+  }
+  .boxsuffix,
+  .boxprefix {
+    white-space:pre;
+  }
+  .boxprefix {
+    margin-right:0.5ch;
   }
   @keyframes blink_anim {
     50% {
@@ -38,20 +47,20 @@
     <img src={{ctrl.panel.bgURL}} ng-click="ctrl.clicktest($event)"/>
     <span ng-repeat="box in ctrl.panel.boxes track by $index" style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:0px;">
       <a ng-href="{{box.URL}}" ng-class="box.URL?'hasLink':'noLink'" class="alignHorizontally">
-        <div ng-if="box.hasOrb && box.orbHideText" style="font-size:0px;">
+        <div ng-if="box.hasOrb && box.orbHideText">
           <span ng-class="box.isBlinking?'blink':''" class="orbDefaults" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};"></span>
         </div>
-        <div ng-if="box.hasOrb && !box.orbHideText && box.orbLocation==='Top'" style="font-size:0px;">
+        <div ng-if="box.hasOrb && !box.orbHideText && box.orbLocation==='Top'">
           <span ng-class="box.isBlinking?'blink':''" class="orbDefaults" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};"></span>
         </div>
         <div ng-if="!box.hasOrb || !box.orbHideText" style="font-size:{{box.fontsize}}px;line-height:normal;">
           <span ng-if="box.hasOrb && box.orbLocation === 'Left'" ng-class="box.isBlinking?'blink':''" class="orbDefaults alignVertically" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};"></span>
-          <span ng-if="box.prefix" class="boxprefix alignVertically" style="margin-right:0.5ch;white-space:pre;font-size:{{box.prefixSize}}px;">{{box.prefix}}</span>
+          <span ng-if="box.prefix" class="boxprefix alignVertically" style="font-size:{{box.prefixSize}}px;">{{box.prefix}}</span>
           <span ng-class="box.isBlinking?'blink':''" class="alignVertically">{{box.text}}</span>
-          <span ng-if="box.suffix" ng-class="box.isBlinking?'blink boxsuffix':'boxsuffix'" class="alignVertically" style="white-space:pre;font-size:{{box.suffixSize}}px">{{box.suffix}}</span>
+          <span ng-if="box.suffix" ng-class="box.isBlinking?'blink':''" class="alignVertically boxsuffix" style="font-size:{{box.suffixSize}}px">{{box.suffix}}</span>
           <span ng-if="box.hasOrb && box.orbLocation === 'Right'" ng-class="box.isBlinking?'blink':''" class="orbDefaults alignVertically" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};"></span>
         </div>
-        <div ng-if="box.hasOrb && !box.orbHideText && box.orbLocation==='Bottom'" style="font-size:0px;">
+        <div ng-if="box.hasOrb && !box.orbHideText && box.orbLocation==='Bottom'">
             <span ng-class="box.isBlinking?'blink':''" class="orbDefaults" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};"></span>
         </div>
       </a>
