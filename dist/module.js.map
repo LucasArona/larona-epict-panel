@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/module.js"],"names":["EpictCtrl"],"mappings":";;;;;;;;AAAQA,e,eAAAA,S;;;2BAGNA,S","file":"module.js","sourcesContent":["import {EpictCtrl} from './epict_ctrl';\n\nexport {\n  EpictCtrl as PanelCtrl\n};\n"]}
+{"version":3,"sources":["../src/module.js"],"names":["EpictCtrl"],"mappings":";;;;;;;;AAAQA,e,eAAAA,S;;;2BAGNA,S","file":"module.js","sourcesContent":["import {EpictCtrl} from './epict_ctrl';\r\n\r\nexport {\r\n  EpictCtrl as PanelCtrl\r\n};\r\n"]}
