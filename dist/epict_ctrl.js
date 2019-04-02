@@ -182,6 +182,11 @@ System.register(['app/plugins/sdk', 'app/core/time_series2', 'lodash', 'd3'], fu
             console.log(this.panel.boxes);
           }
         }, {
+          key: 'cloneBox',
+          value: function cloneBox($index) {
+            this.panel.boxes.push(Object.assign({}, this.panel.boxes[$index]));
+          }
+        }, {
           key: 'deleteBox',
           value: function deleteBox($index) {
             this.panel.boxes.splice($index, 1);

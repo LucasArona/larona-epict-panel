@@ -108,6 +108,9 @@ export class EpictCtrl extends MetricsPanelCtrl {
     
     console.log(this.panel.boxes);
   }
+  cloneBox($index){
+    this.panel.boxes.push(Object.assign({}, this.panel.boxes[$index]));
+  }
   deleteBox($index){
      this.panel.boxes.splice($index,1);
   }
