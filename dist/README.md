@@ -53,6 +53,6 @@ The coloring follows the same threshold rules as the metric.
 ### v1.2.0
 - New feature: You can now display a colored orb with the text
 
-### v1.3.0
+### v1.2.1
 - New feature: You can now duplicate boxdefinitions
 
