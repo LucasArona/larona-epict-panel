@@ -44,9 +44,9 @@
 </style>
 <div class="epict-panel" style="display:flex;justify-content:center">
   <div id="img-wrapper" style="position:relative;">
-    <img src={{ctrl.panel.bgURL}} ng-click="ctrl.clicktest($event)"/>
+    <img src={{ctrl.processedBgURL}} ng-click="ctrl.clicktest($event)"/>
     <span ng-repeat="box in ctrl.panel.boxes track by $index" style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:0px;">
-      <a ng-href="{{box.URL}}" ng-class="box.URL?'hasLink':'noLink'" class="alignHorizontally">
+      <a ng-href="{{box.processedURL}}" ng-class="box.processedURL?'hasLink':'noLink'" class="alignHorizontally">
         <div ng-if="box.hasOrb && box.orbHideText">
           <span ng-class="box.isBlinking?'blink':''" class="orbDefaults" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};"></span>
         </div>

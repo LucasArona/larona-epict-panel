@@ -79,7 +79,13 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
         }, {
           key: "render",
           value: function render() {
+            this.processedBgURL = this.templateSrv.replace(this.panel.bgURL, this.panel.scopedVars);
+            var self = this;
             this.scope.ctrl.panel.boxes.forEach(function (box) {
+              if (box.URL) {
+                box.processedURL = self.templateSrv.replace(box.URL, self.panel.scopedVars);
+              }
+
               if (box.usingThresholds == true) {
                 if (box.rawValue <= parseInt(box.thresholds.split(',')[0])) {
                   box.color = box.colorLow;
