@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-System.register(['./epict_ctrl'], function (_export, _context) {
+System.register(["./epict_ctrl"], function (_export, _context) {
   "use strict";
 
   var EpictCtrl;
@@ -9,7 +9,7 @@ System.register(['./epict_ctrl'], function (_export, _context) {
       EpictCtrl = _epict_ctrl.EpictCtrl;
     }],
     execute: function () {
-      _export('PanelCtrl', EpictCtrl);
+      _export("PanelCtrl", EpictCtrl);
     }
   };
 });
