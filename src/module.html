@@ -56,7 +56,7 @@
         <div ng-if="!box.hasOrb || !box.orbHideText" style="font-size:{{box.fontsize}}px;line-height:normal;">
           <span ng-if="box.hasOrb && box.orbLocation === 'Left'" ng-class="box.isBlinking?'blink':''" class="orbDefaults alignVertically" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};"></span>
           <span ng-if="box.prefix" class="boxprefix alignVertically" style="font-size:{{box.prefixSize}}px;">{{box.prefix}}</span>
-          <span ng-class="box.isBlinking?'blink':''" class="alignVertically">{{box.text}}</span>
+          <span ng-class="box.isBlinking?'blink':''" class="alignVertically">{{ctrl.boxesTexts[$index]}}</span>
           <span ng-if="box.suffix" ng-class="box.isBlinking?'blink':''" class="alignVertically boxsuffix" style="font-size:{{box.suffixSize}}px">{{box.suffix}}</span>
           <span ng-if="box.hasOrb && box.orbLocation === 'Right'" ng-class="box.isBlinking?'blink':''" class="orbDefaults alignVertically" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};"></span>
         </div>
