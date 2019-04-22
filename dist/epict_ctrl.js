@@ -65,6 +65,8 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
 
           _this.events.on('render', _this.render.bind(_assertThisInitialized(_this)));
 
+          _this.boxesRawValues = [];
+          _this.boxesTexts = [];
           return _this;
         }
 
@@ -81,13 +83,17 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
           value: function render() {
             this.processedBgURL = this.templateSrv.replace(this.panel.bgURL, this.panel.scopedVars);
             var self = this;
-            this.scope.ctrl.panel.boxes.forEach(function (box) {
+            var numberOfBoxes = this.scope.ctrl.panel.boxes.length;
+
+            for (var i = 0; i < numberOfBoxes; i++) {
+              var box = this.scope.ctrl.panel.boxes[i];
+
               if (box.URL) {
                 box.processedURL = self.templateSrv.replace(box.URL, self.panel.scopedVars);
               }
 
               if (box.usingThresholds == true) {
-                if (box.rawValue <= parseInt(box.thresholds.split(',')[0])) {
+                if (this.boxesRawValues[i] <= parseInt(box.thresholds.split(',')[0])) {
                   box.color = box.colorLow;
 
                   if (box.blinkLow) {
@@ -95,7 +101,7 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
                   } else {
                     box.isBlinking = false;
                   }
-                } else if (box.rawValue >= parseInt(box.thresholds.split(',')[1])) {
+                } else if (this.boxesRawValues[i] >= parseInt(box.thresholds.split(',')[1])) {
                   box.color = box.colorHigh;
 
                   if (box.blinkHigh) {
@@ -111,19 +117,79 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
               } else {
                 box.isBlinking = false;
               }
-            }); //	alert("yes");
+            }
+            /*this.scope.ctrl.panel.boxes.forEach(function(box){
+            	if(box.URL){
+            		box.processedURL=self.templateSrv.replace(box.URL, self.panel.scopedVars)
+            	}
+            	if(box.usingThresholds==true){
+                   		if(box.rawValue <=parseInt(box.thresholds.split(',')[0])){
+            			box.color=box.colorLow;
+            			if(box.blinkLow){
+            				box.isBlinking=true
+            			}else{
+            				box.isBlinking=false;
+            			}
+            		}else if(box.rawValue >=parseInt(box.thresholds.split(',')[1])){
+            			box.color=box.colorHigh;
+            			if(box.blinkHigh){
+            				box.isBlinking=true
+            			}else{
+            				box.isBlinking=false;
+            			}
+            		}else{
+            			box.color=box.colorMedium
+            			box.isBlinking=false;
+            		}
+            		//alert(box.rawValue);
+            	}else{
+            		box.isBlinking=false;
+            	}
+            });*/
+
           }
         }, {
           key: "onDataReceived",
           value: function onDataReceived(panelData) {
-            var _this2 = this;
-
             // console.log(panelData);
             this.series = panelData.map(this.seriesHandler.bind(this)); // console.log(this.series);
+
+            this.boxesRawValues = []; //Store values in this array instead of boxes, otherwise the values will be persisted in grafana db and trigger an "unsaved changes warning" everytime
             //Assigner valeur
 
-            this.panel.boxes.forEach(function (box) {
-              var wantedSerie = _this2.series.filter(function (oneSerie) {
+            /*    this.panel.boxes.forEach(box => {
+                 var wantedSerie = this.series.filter(function (oneSerie) {
+                    return oneSerie.alias == box.serie;
+                  });
+                  
+                  if(wantedSerie != null && wantedSerie[0]!=null && wantedSerie[0].datapoints.length!=0)
+                  {
+            	if(wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]!=null){
+            		var nf = new Intl.NumberFormat();
+                    	var numberBeforeFormatting=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
+                    	
+            		this.boxesRawValues.push(wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]); //Used to determine the color if the Threshold is enabled
+            	
+            		box.rawValue=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]  //Used to determine the color if the Threshold is enabled
+            		var formattedNumber = nf.format(numberBeforeFormatting);
+                    	box.text = formattedNumber;
+            	}else{
+            		box.text="-";
+            	}
+                  }else{
+                    box.text="N/A";
+                  } 
+                  // console.log(wantedSerie);
+                  // alert(wantedSerie[0].datapoints[wantedSerie.length-1]);
+                }); 
+              */
+
+            var size = this.panel.boxes.length;
+            this.boxesTexts = [];
+
+            for (var i = 0; i < size; i++) {
+              var box = this.panel.boxes[i];
+              var wantedSerie = this.series.filter(function (oneSerie) {
                 return oneSerie.alias == box.serie;
               });
 
@@ -131,19 +197,27 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
                 if (wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0] != null) {
                   var nf = new Intl.NumberFormat();
                   var numberBeforeFormatting = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
-                  box.rawValue = wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]; //Used to determine the color if the Threshold is enabled
+                  this.boxesRawValues.push(wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]); //Used to determine the color if the Threshold is enabled
+                  //box.rawValue=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]  //Used to determine the color if the Threshold is enabled
 
-                  var formattedNumber = nf.format(numberBeforeFormatting);
-                  box.text = formattedNumber;
+                  var formattedNumber = nf.format(numberBeforeFormatting); //box.text = formattedNumber;
+
+                  this.boxesTexts.push(formattedNumber);
                 } else {
-                  box.text = "-";
+                  this.boxesRawValues.push(null);
+                  this.boxesTexts.push("-"); //box.text="-";
                 }
               } else {
-                box.text = "N/A";
+                //box.text="N/A";
+                this.boxesRawValues.push(null);
+                this.boxesTexts.push("N/A");
               } // console.log(wantedSerie);
               // alert(wantedSerie[0].datapoints[wantedSerie.length-1]);
 
-            });
+            }
+
+            console.log(this.boxesRawValues);
+            console.log(this.boxesTexts);
             this.render();
           }
         }, {
@@ -195,6 +269,7 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
           key: "deleteBox",
           value: function deleteBox($index) {
             this.panel.boxes.splice($index, 1);
+            this.refresh();
           }
         }, {
           key: "clicktest",
@@ -206,13 +281,13 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
         }, {
           key: "link",
           value: function link(scope, elem) {
-            var _this3 = this;
+            var _this2 = this;
 
             this.events.on('render', function () {
               var $panelContainer = elem.find('.panel-container');
 
-              if (_this3.panel.bgColor) {
-                $panelContainer.css('background-color', _this3.panel.bgColor);
+              if (_this2.panel.bgColor) {
+                $panelContainer.css('background-color', _this2.panel.bgColor);
               } else {
                 $panelContainer.css('background-color', '');
               }
