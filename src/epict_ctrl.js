@@ -67,34 +67,6 @@ export class EpictCtrl extends MetricsPanelCtrl {
                 }
 
 	}
-	/*this.scope.ctrl.panel.boxes.forEach(function(box){
-		if(box.URL){
-			box.processedURL=self.templateSrv.replace(box.URL, self.panel.scopedVars)
-		}
-		if(box.usingThresholds==true){
-        		if(box.rawValue <=parseInt(box.thresholds.split(',')[0])){
-				box.color=box.colorLow;
-				if(box.blinkLow){
-					box.isBlinking=true
-				}else{
-					box.isBlinking=false;
-				}
-			}else if(box.rawValue >=parseInt(box.thresholds.split(',')[1])){
-				box.color=box.colorHigh;
-				if(box.blinkHigh){
-					box.isBlinking=true
-				}else{
-					box.isBlinking=false;
-				}
-			}else{
-				box.color=box.colorMedium
-				box.isBlinking=false;
-			}
-			//alert(box.rawValue);
-		}else{
-			box.isBlinking=false;
-		}
-	});*/
   }
 
   onDataReceived(panelData) {
@@ -105,32 +77,6 @@ export class EpictCtrl extends MetricsPanelCtrl {
     this.boxesRawValues=[]; //Store values in this array instead of boxes, otherwise the values will be persisted in grafana db and trigger an "unsaved changes warning" everytime
 
     //Assigner valeur
-/*    this.panel.boxes.forEach(box => {
-     var wantedSerie = this.series.filter(function (oneSerie) {
-        return oneSerie.alias == box.serie;
-      });
-      
-      if(wantedSerie != null && wantedSerie[0]!=null && wantedSerie[0].datapoints.length!=0)
-      {
-	if(wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]!=null){
-		var nf = new Intl.NumberFormat();
-        	var numberBeforeFormatting=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
-        	
-		this.boxesRawValues.push(wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]); //Used to determine the color if the Threshold is enabled
-	
-		box.rawValue=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]  //Used to determine the color if the Threshold is enabled
-		var formattedNumber = nf.format(numberBeforeFormatting);
-        	box.text = formattedNumber;
-	}else{
-		box.text="-";
-	}
-      }else{
-        box.text="N/A";
-      } 
-      // console.log(wantedSerie);
-      // alert(wantedSerie[0].datapoints[wantedSerie.length-1]);
-    }); 
-  */  
 	var size=this.panel.boxes.length;
 	this.boxesTexts=[];
 	for(var i=0; i<size; i++){
@@ -144,23 +90,18 @@ export class EpictCtrl extends MetricsPanelCtrl {
         			var nf = new Intl.NumberFormat();
                 		var numberBeforeFormatting=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0].toFixed(box.decimal);
 	                	this.boxesRawValues.push(wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]); //Used to determine the color if the Threshold is enabled
-		                //box.rawValue=wantedSerie[0].datapoints[wantedSerie[0].datapoints.length - 1][0]  //Used to determine the color if the Threshold is enabled
 				var formattedNumber = nf.format(numberBeforeFormatting);
-				//box.text = formattedNumber;
 				this.boxesTexts.push(formattedNumber);
 			}else{
 				this.boxesRawValues.push(null);
 				this.boxesTexts.push("-")
-				//box.text="-";
 			}
 		}else{
-			//box.text="N/A";
 			this.boxesRawValues.push(null);
 			this.boxesTexts.push("N/A")
 
 		}
 		// console.log(wantedSerie);
-		// alert(wantedSerie[0].datapoints[wantedSerie.length-1]);
 	}
 
 	console.log(this.boxesRawValues);
