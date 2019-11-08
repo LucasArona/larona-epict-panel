@@ -96,6 +96,14 @@
 				</div>
 				<div class="gf-form-inline" ng-if="box.hasOrb">
 					<div class="gf-form-inline">
+						<div class="gf-form">
+							<label class="gf-form-label width-8">Orb Tooltip</label>
+							<input type="text" class="input-small gf-form-input width-15" ng-model="box.orbTooltip" ng-change="ctrl.render()"/>
+						</div>
+					</div>
+				</div>
+				<div class="gf-form-inline" ng-if="box.hasOrb">
+					<div class="gf-form-inline">
 						<gf-form-switch class="gf-form" label-class="width-8" label="Hide text" checked="box.orbHideText" on-change="ctrl.render()"></gf-form-switch>
 						<div ng-if="!box.orbHideText">
 							<div class="gf-form">
@@ -122,7 +130,7 @@
 							<label class="gf-form-label width-8">Thresholds
 								<info-popover mode="right-normal">
 									<p>Enter 2 comma-separated numbers. 20,60 will produce: <code>value &lt;= 20</code> -&gt; green <br />
-									 	<code>value between 20 and 60</code> -&gt; yellow <br />
+										<code>value between 20 and 60</code> -&gt; yellow <br />
 										<code>value &gt;= 60</code> -&gt; red </p>
 								</info-popover>
 							</label>
