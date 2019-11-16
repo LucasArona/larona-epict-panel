@@ -112,8 +112,7 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
                 } else {
                   box.color = box.colorMedium;
                   box.isBlinking = false;
-                } //alert(box.rawValue);
-
+                }
               } else {
                 box.isBlinking = false;
               }
@@ -122,11 +121,11 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
         }, {
           key: "onDataReceived",
           value: function onDataReceived(panelData) {
-            // console.log(panelData);
+            var self = this; // console.log(panelData);
+
             this.series = panelData.map(this.seriesHandler.bind(this)); // console.log(this.series);
 
             this.boxesRawValues = []; //Store values in this array instead of boxes, otherwise the values will be persisted in grafana db and trigger an "unsaved changes warning" everytime
-            //Assigner valeur
 
             var size = this.panel.boxes.length;
             this.boxesTexts = [];
@@ -134,7 +133,7 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
             for (var i = 0; i < size; i++) {
               var box = this.panel.boxes[i];
               var wantedSerie = this.series.filter(function (oneSerie) {
-                return oneSerie.alias == box.serie;
+                return oneSerie.alias == self.templateSrv.replace(box.serie, self.panel.scopedVars);
               });
 
               if (wantedSerie != null && wantedSerie[0] != null && wantedSerie[0].datapoints.length != 0) {
@@ -152,8 +151,7 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
               } else {
                 this.boxesRawValues.push(null);
                 this.boxesTexts.push("N/A");
-              } // console.log(wantedSerie);
-
+              }
             }
 
             console.log(this.boxesRawValues);
@@ -183,6 +181,7 @@ System.register(["app/plugins/sdk", "app/core/time_series2", "lodash", "d3"], fu
               text: "N/A",
               xpos: 0,
               ypos: 0,
+              angle: 0,
               fontsize: 12,
               prefixSize: 10,
               suffixSize: 10,

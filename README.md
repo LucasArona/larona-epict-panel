@@ -59,4 +59,8 @@ The coloring follows the same threshold rules as the metric.
 - Bugfix: The "Unsaved Changes" dialog box should not appear when the user has not made any changes.
 
 ### v1.2.2
-- New feature: Show tooltip on orb
+- New feature: A tooltip is now available on the orbs with the current value.
+- New feature: You can specify a rotation angle for the boxes.
+- New feature: You can use variables in the Metric Name field of the boxes, so you can easily change the metrics used by your boxes.
+
+

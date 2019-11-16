@@ -18,7 +18,6 @@
     border-color: #000;
     display: inline-block;
     font-size: 0px;
-
   }
   .alignHorizontally {
     display: inline-block;
@@ -45,7 +44,7 @@
 <div class="epict-panel" style="display:flex;justify-content:center">
   <div id="img-wrapper" style="position:relative;">
     <img src={{ctrl.processedBgURL}} ng-click="ctrl.clicktest($event)"/>
-    <span ng-repeat="box in ctrl.panel.boxes track by $index" style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:0px;">
+    <span ng-repeat="box in ctrl.panel.boxes track by $index" style="position:absolute;top:{{box.ypos}}px;left:{{box.xpos}}px;color:{{box.color}};font-size:0px;transform:rotate({{box.angle}}deg)">
       <a ng-href="{{box.processedURL}}" ng-class="box.processedURL?'hasLink':'noLink'" class="alignHorizontally">
         <div ng-if="box.hasOrb && box.orbHideText">
           <span ng-class="box.isBlinking?'blink':''" class="orbDefaults" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};" title="{{box.prefix}} {{ctrl.boxesTexts[$index]}} {{box.suffix}}"></span>
@@ -61,7 +60,7 @@
           <span ng-if="box.hasOrb && box.orbLocation === 'Right'" ng-class="box.isBlinking?'blink':''" class="orbDefaults alignVertically" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};" title="{{box.prefix}} {{ctrl.boxesTexts[$index]}} {{box.suffix}}"></span>
         </div>
         <div ng-if="box.hasOrb && !box.orbHideText && box.orbLocation==='Bottom'">
-            <span ng-class="box.isBlinking?'blink':''" class="orbDefaults" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};" title="{{box.prefix}} {{ctrl.boxesTexts[$index]}} {{box.suffix}}"></span>
+          <span ng-class="box.isBlinking?'blink':''" class="orbDefaults" style="height:{{box.orbSize}}px;width:{{box.orbSize}}px;background-color:{{box.color}};" title="{{box.prefix}} {{ctrl.boxesTexts[$index]}} {{box.suffix}}"></span>
         </div>
       </a>
     </span>

@@ -15,7 +15,7 @@
 				<span class="btn btn-danger gf-form-button" ng-click="ctrl.deleteBox($index);ctrl.render()" type="button">
 					<i class="fa fa-trash" ></i>
 				</span>
-				<span class="btn btn-secondary gf-form-button" ng-click="ctrl.cloneBox($index);ctrl.render()" type="button">
+				<span class="btn btn-secondary gf-form-button" ng-click="ctrl.cloneBox($index);ctrl.refresh()" type="button">
 					<i class="fa fa-copy" ></i>
 				</span>
 			</div>
@@ -66,6 +66,10 @@
 						<label class="gf-form-label width-2">Y</label>
 						<input type="text" class="gf-form-input width-5" ng-model="box.ypos" ng-change="ctrl.render()" />
 					</div>
+				</div>
+				<div class="gf-form">
+					<label class="gf-form-label width-5">Angle</label>
+					<input type="text" class="gf-form-input width-5" ng-model="box.angle" ng-change="ctrl.render()" />
 				</div>
 				<h5 class="section-heading">Link</h5>
 				<div class="gf-form">
@@ -152,7 +156,7 @@
 		</div>
 		<div class="editor-row">
 			<div class="gf-form-button">
-				<button class="btn btn-inverse" ng-click="ctrl.addBox();ctrl.render()">
+				<button class="btn btn-inverse" ng-click="ctrl.addBox();ctrl.refresh()">
 				<i class="fa fa-plus"></i>&nbsp;Add a box
 				</button>
 			</div>
