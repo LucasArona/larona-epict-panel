@@ -57,3 +57,6 @@ The coloring follows the same threshold rules as the metric.
 - New feature: You can now duplicate boxdefinitions
 - New feature: You can now use variables in the URL fields (for the background URL and the clickable link in the boxes)
 - Bugfix: The "Unsaved Changes" dialog box should not appear when the user has not made any changes.
+
+### v1.2.2
+- New feature: Show tooltip on orb
