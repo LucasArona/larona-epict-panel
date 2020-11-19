@@ -1,17 +1,12 @@
-import React from "react";
-import { PanelProps } from "@grafana/data";
-import { SimpleOptions, Box } from "types";
-import { css, cx } from "emotion";
-import { stylesFactory } from "@grafana/ui";
-import { getTemplateSrv } from "@grafana/runtime";
+import React from 'react';
+import { PanelProps } from '@grafana/data';
+import { SimpleOptions, Box } from 'types';
+import { css, cx } from 'emotion';
+import { stylesFactory } from '@grafana/ui';
+import { getTemplateSrv } from '@grafana/runtime';
 
 interface Props extends PanelProps<SimpleOptions> {}
-export const SimplePanel: React.FC<Props> = ({
-  options,
-  data,
-  width,
-  height
-}) => {
+export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
   let processedBgURL = getTemplateSrv().replace(options.bgURL);
   let boxes = options.boxes;
   const styles = getStyles();
@@ -32,7 +27,7 @@ export const SimplePanel: React.FC<Props> = ({
             )}
           >
             <a
-              href={oneBox.url ? getTemplateSrv().replace(oneBox.url) : "#"}
+              href={oneBox.url ? getTemplateSrv().replace(oneBox.url) : '#'}
               className={cx(
                 styles.boxLink,
                 oneBox.url
@@ -45,12 +40,10 @@ export const SimplePanel: React.FC<Props> = ({
               )}
             >
               {(oneBox.hasOrb && oneBox.orbHideText) ||
-              (oneBox.hasOrb &&
-                !oneBox.orbHideText &&
-                oneBox.orbLocation === "Top") ? (
+              (oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Top') ? (
                 <span
                   className={cx(
-                    isBoxBlinking(oneBox) ? styles.blink : "",
+                    isBoxBlinking(oneBox) ? styles.blink : '',
                     styles.orbDefaults,
                     css`
                       height: ${oneBox.orbSize}px;
@@ -70,10 +63,10 @@ export const SimplePanel: React.FC<Props> = ({
                     `
                   )}
                 >
-                  {oneBox.hasOrb && oneBox.orbLocation === "Left" ? (
+                  {oneBox.hasOrb && oneBox.orbLocation === 'Left' ? (
                     <span
                       className={cx(
-                        isBoxBlinking(oneBox) ? styles.blink : "",
+                        isBoxBlinking(oneBox) ? styles.blink : '',
                         styles.orbDefaults,
                         styles.alignVertically,
                         css`
@@ -101,12 +94,7 @@ export const SimplePanel: React.FC<Props> = ({
                     </span>
                   ) : null}
 
-                  <span
-                    className={cx(
-                      isBoxBlinking(oneBox) ? styles.blink : "",
-                      styles.alignVertically
-                    )}
-                  >
+                  <span className={cx(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically)}>
                     {getBoxText(oneBox)}
                   </span>
 
@@ -125,10 +113,10 @@ export const SimplePanel: React.FC<Props> = ({
                     </span>
                   ) : null}
 
-                  {oneBox.hasOrb && oneBox.orbLocation === "Right" ? (
+                  {oneBox.hasOrb && oneBox.orbLocation === 'Right' ? (
                     <span
                       className={cx(
-                        isBoxBlinking(oneBox) ? styles.blink : "",
+                        isBoxBlinking(oneBox) ? styles.blink : '',
                         styles.orbDefaults,
                         styles.alignVertically,
                         css`
@@ -142,12 +130,10 @@ export const SimplePanel: React.FC<Props> = ({
                   ) : null}
                 </div>
               ) : null}
-              {oneBox.hasOrb &&
-              !oneBox.orbHideText &&
-              oneBox.orbLocation === "Bottom" ? (
+              {oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Bottom' ? (
                 <span
                   className={cx(
-                    isBoxBlinking(oneBox) ? styles.blink : "",
+                    isBoxBlinking(oneBox) ? styles.blink : '',
                     styles.orbDefaults,
                     css`
                       height: ${oneBox.orbSize}px;
@@ -166,14 +152,10 @@ export const SimplePanel: React.FC<Props> = ({
   );
 
   function isBoxBlinking(box: Box): boolean {
-    if (
-      box.isUsingThresholds &&
-      box.thresholds &&
-      (box.blinkHigh || box.blinkLow)
-    ) {
+    if (box.isUsingThresholds && box.thresholds && (box.blinkHigh || box.blinkLow)) {
       const value = getBoxText(box);
-      const lowThreshold = +box.thresholds.split(",")[0];
-      const highThreshold = +box.thresholds.split(",")[1];
+      const lowThreshold = +box.thresholds.split(',')[0];
+      const highThreshold = +box.thresholds.split(',')[1];
       if (box.blinkHigh && +value >= highThreshold) {
         return true;
       } else if (box.blinkLow && +value <= lowThreshold) {
@@ -185,8 +167,8 @@ export const SimplePanel: React.FC<Props> = ({
   function getBoxColor(box: Box): string {
     const value = getBoxText(box);
     if (box.isUsingThresholds && box.thresholds) {
-      const lowThreshold = +box.thresholds.split(",")[0];
-      const highThreshold = +box.thresholds.split(",")[1];
+      const lowThreshold = +box.thresholds.split(',')[0];
+      const highThreshold = +box.thresholds.split(',')[1];
       if (+value >= highThreshold) {
         return box.colorHigh;
       } else if (+value <= lowThreshold) {
@@ -199,11 +181,7 @@ export const SimplePanel: React.FC<Props> = ({
   }
 
   function getBoxTitleText(box: Box): string {
-    return (
-      box.prefix ??
-      "".concat(getBoxValue(box.serie, 5)) ??
-      "".concat(box.suffix)
-    );
+    return box.prefix ?? ''.concat(getBoxValue(box.serie, 5)) ?? ''.concat(box.suffix);
   }
   function getBoxText(box: Box): string {
     return getBoxValue(box.serie, box.decimal);
@@ -212,19 +190,19 @@ export const SimplePanel: React.FC<Props> = ({
   function getBoxValue(serieName: string, decimals: number): string {
     console.log(data);
     const serie = data.series.find(s => s.name === serieName);
-    let fields = serie?.fields.find(f => f.type === "number");
+    let fields = serie?.fields.find(f => f.type === 'number');
     let lastValue = fields?.values
       .get(fields.values.length - 1)
       .toFixed(decimals)
       .toString();
-    lastValue = lastValue ? lastValue : "N/A";
+    lastValue = lastValue ? lastValue : 'N/A';
     return lastValue;
   }
 };
 
 let onBgClick = (event: any) => {
   if (event.ctrlKey) {
-    alert("X:" + event.nativeEvent.offsetX + " Y:" + event.nativeEvent.offsetY);
+    alert('X:' + event.nativeEvent.offsetX + ' Y:' + event.nativeEvent.offsetY);
   }
 };
 
@@ -279,6 +257,6 @@ const getStyles = stylesFactory(() => {
     boxSuffix: css`
       white-space: pre;
       margin-right: 0.5ch;
-    `
+    `,
   };
 });

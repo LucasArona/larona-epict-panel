@@ -1,15 +1,13 @@
-import { PanelModel } from "@grafana/data";
-import { SimpleOptions } from "types";
+import { PanelModel } from '@grafana/data';
+import { SimpleOptions } from 'types';
 
 class Opts implements SimpleOptions {
   bgURL!: string;
-  boxes!: Array<import("./types").Box>;
+  boxes!: Array<import('./types').Box>;
 }
 
-export const MigHandler = (
-  panel: PanelModel<Partial<SimpleOptions>> | any
-): Partial<SimpleOptions> => {
-  console.log("Migrating from an older version", panel);
+export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Partial<SimpleOptions> => {
+  console.log('Migrating from an older version', panel);
   const options: SimpleOptions = new Opts();
   options.bgURL = panel.bgURL;
   options.boxes = [];
@@ -39,7 +37,7 @@ export const MigHandler = (
       isUsingThresholds: oldBox.usingThresholds,
       xpos: oldBox.xpos,
       ypos: oldBox.ypos,
-      url: oldBox.URL
+      url: oldBox.URL,
     });
   });
   return options;

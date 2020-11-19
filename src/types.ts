@@ -30,4 +30,4 @@ export interface Box {
   url: string;
 }
 
-export type OrbLocations = "Top" | "Bottom" | "Left" | "Right";
+export type OrbLocations = 'Top' | 'Bottom' | 'Left' | 'Right';
