@@ -12,7 +12,7 @@ export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Par
   options.bgURL = panel.bgURL;
   options.boxes = [];
   panel.boxes.forEach((oldBox: any) => {
-    console.log(oldBox);
+    console.log('Found a box to upgrade:', oldBox);
     options.boxes.push({
       angle: oldBox.angle,
       color: oldBox.color,
@@ -20,7 +20,7 @@ export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Par
       colorLow: oldBox.colorLow,
       colorMedium: oldBox.colorMedium,
       decimal: oldBox.decimal,
-      fontSize: oldBox.fontSize,
+      fontSize: oldBox.fontsize,
       hasOrb: oldBox.hasOrb,
       orbHideText: oldBox.orbHideText,
       orbLocation: oldBox.orbLocation,
