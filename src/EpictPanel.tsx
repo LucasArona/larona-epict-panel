@@ -188,7 +188,6 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   }
 
   function getBoxValue(serieName: string, decimals: number): string {
-    console.log(data);
     const serie = data.series.find(s => s.name === serieName);
     let fields = serie?.fields.find(f => f.type === 'number');
     let lastValue = fields?.values

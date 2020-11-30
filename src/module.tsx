@@ -28,7 +28,6 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
         var ctx = (props as any).context;
         var data = ctx.data;
         var options = ctx.options as SimpleOptions;
-        console.log(options.boxes);
         if (options.boxes == null) {
           options.boxes = [];
         }
