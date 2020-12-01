@@ -5,8 +5,7 @@
   "info": {
     "description": "Enter the URL of the image you want, and add some metrics on it.",
     "author": {
-      "name": "larona",
-      "url": ""
+      "name": "larona"
     },
     "keywords": [
       "pictures",
@@ -33,7 +32,7 @@
     "updated": "%TODAY%"
   },
   "dependencies": {
-    "grafanaVersion": "6.3.x",
+    "grafanaVersion": "7.x.x",
     "plugins": []
   }
 }
