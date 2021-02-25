@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.1
+
+- Fixes an issue triggered when the last value of the serie was null
+
 ## v2.0.0
 
 - Complete code rewrite (AngularJS to React)

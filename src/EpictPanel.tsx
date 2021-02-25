@@ -188,14 +188,22 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   }
 
   function getBoxValue(serieName: string, decimals: number): string {
+    let retVal = 'N/A';
     const serie = data.series.find(s => s.name === serieName);
     let fields = serie?.fields.find(f => f.type === 'number');
-    let lastValue = fields?.values
-      .get(fields.values.length - 1)
-      .toFixed(decimals)
-      .toString();
-    lastValue = lastValue ? lastValue : 'N/A';
-    return lastValue;
+
+    let lastNotNullValueIndex = fields?.values.length;
+    if (lastNotNullValueIndex) {
+      while (lastNotNullValueIndex-- && fields?.values.get(lastNotNullValueIndex) == null) {} //Find the last non-null value
+      if (lastNotNullValueIndex !== -1) {
+        // If we only have null values, index = -1
+        retVal = fields?.values
+          .get(lastNotNullValueIndex)
+          .toFixed(decimals)
+          .toString();
+      }
+    }
+    return retVal;
   }
 };
 
