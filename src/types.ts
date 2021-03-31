@@ -24,6 +24,8 @@ export interface Box {
   blinkLow: boolean;
   blinkHigh: boolean;
   hasOrb: boolean;
+  hasBackground: boolean;
+  backgroundColor: string;
   orbSize: number;
   orbHideText: boolean;
   orbLocation: OrbLocations;

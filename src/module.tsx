@@ -1,4 +1,4 @@
-import { PanelPlugin } from '@grafana/data';
+import { DataFrame, FieldType, getFieldDisplayName, PanelPlugin } from '@grafana/data';
 import { Box, SimpleOptions } from './types';
 import { SimplePanel as EpictPanel } from './EpictPanel';
 import { MigHandler } from 'MigHandler';
@@ -44,6 +44,8 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
             decimal: 0,
             fontSize: 12,
             hasOrb: false,
+            hasBackground: false,
+            backgroundColor: '#5794F2',
             orbHideText: false,
             orbLocation: 'Left',
             orbSize: 10,
@@ -128,6 +130,14 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
           box.orbLocation = location.value;
           props.onChange(options.boxes);
         };
+        // const onBoxHasBackgroundChanged = ({ target }: any, box: Box) => {
+        //   box.hasBackground = target.checked;
+        //   props.onChange(options.boxes);
+        // };
+        // const onBoxBackgroundColorChanged = (color: string, box: Box) => {
+        //   box.backgroundColor = color;
+        //   props.onChange(options.boxes);
+        // };
         const onBoxUseThresholdsChanged = ({ target }: any, box: Box) => {
           box.isUsingThresholds = target.checked;
           props.onChange(options.boxes);
@@ -170,12 +180,39 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
           { label: 'Left', value: 'Left' },
           { label: 'Right', value: 'Right' },
         ];
-        const availableSeries = data.map((t: { name: any }) => {
-          return {
-            value: t.name,
-            label: t.name,
-          };
+
+        let availableSeries: Array<{ value: string; label: string }> = [];
+        data.forEach((frm: DataFrame) => {
+          let valuesFields = frm.fields.filter(f => f.type === FieldType.number);
+          valuesFields.forEach(oneValField => {
+            if (oneValField !== undefined) {
+              const fieldDisplayName = getFieldDisplayName(oneValField, frm);
+              let discoveredField =
+                frm.name === undefined || frm.name === fieldDisplayName
+                  ? fieldDisplayName
+                  : `${frm.name} (${fieldDisplayName})`;
+              availableSeries.push({ value: discoveredField, label: discoveredField });
+            }
+          });
         });
+
+        // const availableSeries = data.map((frm: DataFrame) => {
+        //   const valueField = frm.fields.find(field => field.type === FieldType.number);
+        //   if (valueField !== undefined) {
+        //     const fieldDisplayName = getFieldDisplayName(valueField, frm);
+        //     return {
+        //       value:
+        //         frm.name === undefined || frm.name === fieldDisplayName
+        //           ? fieldDisplayName
+        //           : `${frm.name} (${fieldDisplayName})`,
+        //       label:
+        //         frm.name === undefined || frm.name === fieldDisplayName
+        //           ? fieldDisplayName
+        //           : `${frm.name} (${fieldDisplayName})`,
+        //     };
+        //   }
+        //   return null;
+        // });
 
         return (
           <div className="section gf-form-group">
@@ -394,6 +431,24 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                       </Field>
                     </HorizontalGroup>
                   ) : null}
+                  {/* <HorizontalGroup>
+                    <Field label="Show the background">
+                      <Switch
+                        onChange={event => onBoxHasBackgroundChanged(event, oneBox)}
+                        value={oneBox.hasBackground}
+                      />
+                    </Field>
+                    {oneBox.hasBackground ? (
+                      <HorizontalGroup>
+                        <Field label="Color">
+                          <ColorPicker
+                            color={oneBox.backgroundColor}
+                            onChange={color => onBoxBackgroundColorChanged(color, oneBox)}
+                          />
+                        </Field>
+                      </HorizontalGroup>
+                    ) : null}
+                  </HorizontalGroup> */}
                 </div>
                 <hr />
               </div>

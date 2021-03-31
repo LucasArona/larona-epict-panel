@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.2
+
+- Fixes an issue that occurs while the panel upgrades its internal data from previous version
+- Fixes an issue that prevented certain datasources to be selected as metric
+
 ## v2.0.1
 
 - Fixes an issue triggered when the last value of the serie was null

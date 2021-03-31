@@ -7,7 +7,8 @@ class Opts implements SimpleOptions {
 }
 
 export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Partial<SimpleOptions> => {
-  if (panel.boxes != null) {
+  if (panel.boxes != null && panel.pluginVersion == null) {
+    //We found boxes to upgrade from an old plugin
     console.log('Migrating from an older version', panel);
     const options: SimpleOptions = new Opts();
     options.bgURL = panel.bgURL;
@@ -23,6 +24,8 @@ export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Par
         decimal: oldBox.decimal,
         fontSize: oldBox.fontsize,
         hasOrb: oldBox.hasOrb,
+        hasBackground: false,
+        backgroundColor: '#5794F2',
         orbHideText: oldBox.orbHideText,
         orbLocation: oldBox.orbLocation,
         orbSize: oldBox.orbSize,

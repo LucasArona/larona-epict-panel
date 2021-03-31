@@ -1,9 +1,10 @@
 import React from 'react';
-import { PanelProps } from '@grafana/data';
+import { DataFrame, FieldType, getFieldDisplayName, PanelProps } from '@grafana/data';
 import { SimpleOptions, Box } from 'types';
 import { css, cx } from 'emotion';
 import { stylesFactory } from '@grafana/ui';
 import { getTemplateSrv } from '@grafana/runtime';
+import { getLastNotNullValue } from './Utilities';
 
 interface Props extends PanelProps<SimpleOptions> {}
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
@@ -188,20 +189,61 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   }
 
   function getBoxValue(serieName: string, decimals: number): string {
-    let retVal = 'N/A';
-    const serie = data.series.find(s => s.name === serieName);
-    let fields = serie?.fields.find(f => f.type === 'number');
+    let retVal = undefined;
 
-    let lastNotNullValueIndex = fields?.values.length;
-    if (lastNotNullValueIndex) {
-      while (lastNotNullValueIndex-- && fields?.values.get(lastNotNullValueIndex) == null) {} //Find the last non-null value
-      if (lastNotNullValueIndex !== -1) {
-        // If we only have null values, index = -1
-        retVal = fields?.values
-          .get(lastNotNullValueIndex)
-          .toFixed(decimals)
-          .toString();
+    let serie = undefined;
+
+    data.series.every((frm: DataFrame) => {
+      let numberFields = frm.fields.filter(f => f.type === FieldType.number);
+      let targetField = numberFields.find(function(f) {
+        const fieldDisplayName = getFieldDisplayName(f, frm);
+        let discoveredField =
+          frm.name === undefined || frm.name === fieldDisplayName
+            ? fieldDisplayName
+            : `${frm.name} (${fieldDisplayName})`;
+        return discoveredField === serieName;
+      });
+      if (targetField !== undefined && targetField !== null) {
+        retVal = getLastNotNullValue(targetField, decimals);
+        return false; //We found what we were looking for, so stop iterating
       }
+      return true; //Continue iterating
+
+      // valuesFields.forEach(oneValField => {
+      //   if (oneValField !== undefined) {
+      //     const fieldDisplayName = getFieldDisplayName(oneValField, frm);
+      //     let discoveredField =
+      //       frm.name === undefined || frm.name === fieldDisplayName
+      //         ? fieldDisplayName
+      //         : `${frm.name} (${fieldDisplayName})`;
+
+      //     if (discoveredField === serieName) {
+      //       serie = frm;
+      //       return;
+      //     }
+      //   }
+      // });
+    });
+
+    // serie = data.series.find(function(s) {
+    //   const valueField = s.fields.find(se => se.type === FieldType.number);
+    //   if (valueField !== undefined) {
+    //     const fieldDisplayName = getFieldDisplayName(valueField, s);
+    //     let computedSerieName =
+    //       s.name === undefined || s.name === fieldDisplayName ? fieldDisplayName : `${s.name} (${fieldDisplayName})`;
+    //     return computedSerieName === serieName;
+    //   }
+    //   return undefined;
+    // });
+
+    if (retVal === undefined) {
+      serie = data.series.find(s => s.name === serieName); /*for backward compatibility*/
+      let fields = serie?.fields.find(f => f.type === 'number');
+      retVal = getLastNotNullValue(fields, decimals);
+    }
+
+    if (retVal === undefined) {
+      retVal = 'N/A';
     }
     return retVal;
   }
