@@ -208,33 +208,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
         return false; //We found what we were looking for, so stop iterating
       }
       return true; //Continue iterating
-
-      // valuesFields.forEach(oneValField => {
-      //   if (oneValField !== undefined) {
-      //     const fieldDisplayName = getFieldDisplayName(oneValField, frm);
-      //     let discoveredField =
-      //       frm.name === undefined || frm.name === fieldDisplayName
-      //         ? fieldDisplayName
-      //         : `${frm.name} (${fieldDisplayName})`;
-
-      //     if (discoveredField === serieName) {
-      //       serie = frm;
-      //       return;
-      //     }
-      //   }
-      // });
     });
-
-    // serie = data.series.find(function(s) {
-    //   const valueField = s.fields.find(se => se.type === FieldType.number);
-    //   if (valueField !== undefined) {
-    //     const fieldDisplayName = getFieldDisplayName(valueField, s);
-    //     let computedSerieName =
-    //       s.name === undefined || s.name === fieldDisplayName ? fieldDisplayName : `${s.name} (${fieldDisplayName})`;
-    //     return computedSerieName === serieName;
-    //   }
-    //   return undefined;
-    // });
 
     if (retVal === undefined) {
       serie = data.series.find(s => s.name === serieName); /*for backward compatibility*/

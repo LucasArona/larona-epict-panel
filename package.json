@@ -1,6 +1,6 @@
 {
   "name": "larona-epict-panel",
-  "version": "2.0.2-beta",
+  "version": "2.0.2",
   "description": "Enter the URL of the image you want, and add some metrics on it.",
   "scripts": {
     "build": "grafana-toolkit plugin:build",

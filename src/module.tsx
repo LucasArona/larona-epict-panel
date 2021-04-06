@@ -196,24 +196,6 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
           });
         });
 
-        // const availableSeries = data.map((frm: DataFrame) => {
-        //   const valueField = frm.fields.find(field => field.type === FieldType.number);
-        //   if (valueField !== undefined) {
-        //     const fieldDisplayName = getFieldDisplayName(valueField, frm);
-        //     return {
-        //       value:
-        //         frm.name === undefined || frm.name === fieldDisplayName
-        //           ? fieldDisplayName
-        //           : `${frm.name} (${fieldDisplayName})`,
-        //       label:
-        //         frm.name === undefined || frm.name === fieldDisplayName
-        //           ? fieldDisplayName
-        //           : `${frm.name} (${fieldDisplayName})`,
-        //     };
-        //   }
-        //   return null;
-        // });
-
         return (
           <div className="section gf-form-group">
             <h4 className="section-heading">Boxes definitions</h4>
