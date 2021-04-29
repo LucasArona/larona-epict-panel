@@ -102,6 +102,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
                   {oneBox.suffix ? (
                     <span
                       className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
                         styles.alignVertically,
                         styles.boxSuffix,
                         css`

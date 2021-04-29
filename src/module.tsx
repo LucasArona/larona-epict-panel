@@ -71,7 +71,8 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
           props.onChange(options.boxes);
         };
         const onCloneBox = ({ target }: any, box: Box) => {
-          options.boxes.push(Object.create(box));
+          //options.boxes.push(Object.create(box));
+          options.boxes.push({ ...box });
           props.onChange(options.boxes);
         };
         const onBoxSerieUpdated = (value: any, box: Box) => {
