@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.3
+
+- Fixes an issue with the clone button
+- Suffix now blinks if the value is blinking
+
 ## v2.0.2
 
 - Fixes an issue that occurs while the panel upgrades its internal data from previous version
