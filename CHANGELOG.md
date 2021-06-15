@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.4
+
+- Fixes an issue that prevented new installation of recent versions of the plugin on Grafana v8
+
 ## v2.0.3
 
 - Fixes an issue with the clone button
