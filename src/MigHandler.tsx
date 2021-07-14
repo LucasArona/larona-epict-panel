@@ -42,6 +42,15 @@ export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Par
         xpos: oldBox.xpos,
         ypos: oldBox.ypos,
         url: oldBox.URL,
+        onlyShowSymbol: false,
+        symbol: '',
+        symbolWidth: 32,
+        symbolHeight: 32,
+        symbolDefWidth: 32,
+        symbolDefHeight: 32,
+        colorSymbol: false,
+        customSymbol: '',
+        selected: false,
       });
     });
     return options;
