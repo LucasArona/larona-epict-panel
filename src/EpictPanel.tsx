@@ -41,196 +41,196 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
               `
             )}
           >
-            {oneBox.url && !isEditMode() ? (
-              <a
-                href={oneBox.url ? getTemplateSrv().replace(oneBox.url) : '#'}
-                className={cx(
-                  styles.boxLink,
-                  oneBox.url
-                    ? css`
-                        cursor: pointer;
-                      `
-                    : css`
-                        cursor: default;
-                      `
-                )}
-              >
-                {(oneBox.hasOrb && oneBox.orbHideText) ||
-                (oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Top') ? (
-                  <span
-                    className={cx(
-                      isBoxBlinking(oneBox) ? styles.blink : '',
-                      styles.orbDefaults,
-                      css`
-                        height: ${oneBox.orbSize}px;
-                        width: ${oneBox.orbSize}px;
-                        background-color: ${getBoxColor(oneBox)};
-                      `
-                    )}
-                    title={getBoxTitleText(oneBox)}
-                  ></span>
-                ) : null}
-                {!oneBox.hasOrb || !oneBox.orbHideText ? (
-                  <div
-                    className={cx(
-                      css`
-                        font-size: ${oneBox.fontSize}px;
-                        line-heigh: normal;
-                      `
-                    )}
-                  >
-                    {oneBox.symbol !== '' &&
-                    !oneBox.colorSymbol &&
-                    oneBox.symbol !== 'text' &&
-                    oneBox.symbol !== 'custom' ? (
-                      <img
-                        srcSet={getTemplateSrv().replace(oneBox.symbol)}
-                        width={oneBox.symbolWidth}
-                        height={oneBox.symbolHeight}
-                      />
-                    ) : null}
-                    {oneBox.symbol !== '' &&
-                    oneBox.colorSymbol &&
-                    oneBox.symbol !== 'text' &&
-                    oneBox.symbol !== 'custom' ? (
-                      <span
-                        className={cx(
-                          isBoxBlinking(oneBox) ? styles.blink : '',
-                          css`
-                            height: ${oneBox.symbolHeight}px;
-                            width: ${oneBox.symbolWidth}px;
-                            background: ${getBoxColor(oneBox)};
-                            mask-size: cover;
-                            display: inline-block;
-                            mask: url(${getTemplateSrv().replace(oneBox.symbol)});
-                          `
-                        )}
-                      />
-                    ) : null}
-                    {oneBox.symbol === 'custom' && !oneBox.colorSymbol && oneBox.customSymbol !== '' ? (
-                      <img
-                        srcSet={getTemplateSrv().replace(oneBox.customSymbol)}
-                        width={oneBox.symbolWidth}
-                        height={oneBox.symbolHeight}
-                      />
-                    ) : null}
-                    {oneBox.symbol === 'custom' && oneBox.colorSymbol && oneBox.customSymbol !== '' ? (
-                      <span
-                        className={cx(
-                          isBoxBlinking(oneBox) ? styles.blink : '',
-                          css`
-                            height: ${oneBox.symbolHeight}px;
-                            width: ${oneBox.symbolWidth}px;
-                            background: ${getBoxColor(oneBox)};
-                            mask-size: cover;
-                            display: inline-block;
-                            mask: url(${getTemplateSrv().replace(oneBox.customSymbol)});
-                          `
-                        )}
-                      />
-                    ) : null}
-                    {oneBox.symbol === 'text' ? (
-                      <span
-                        className={cx(
-                          isBoxBlinking(oneBox) ? styles.blink : '',
-                          styles.alignVertically,
-                          css`
-                            height: ${oneBox.symbolHeight}px;
-                            width: ${oneBox.symbolWidth}px;
-                          `
-                        )}
-                      >
-                        {oneBox.customSymbol}
-                      </span>
-                    ) : null}
-                    {!oneBox.onlyShowSymbol && oneBox.hasOrb && oneBox.orbLocation === 'Left' ? (
-                      <span
-                        className={cx(
-                          isBoxBlinking(oneBox) ? styles.blink : '',
-                          styles.orbDefaults,
-                          styles.alignVertically,
-                          css`
-                            height: ${oneBox.orbSize}px;
-                            width: ${oneBox.orbSize}px;
-                            background-color: ${getBoxColor(oneBox)};
-                          `
-                        )}
-                        title={getBoxTitleText(oneBox)}
-                      ></span>
-                    ) : null}
+            {/* {oneBox.url && !isEditMode() ? ( */}
+            <a
+              {...(oneBox.url && !isEditMode() ? { href: getTemplateSrv().replace(oneBox.url) } : null)}
+              className={cx(
+                styles.boxLink,
+                oneBox.url
+                  ? css`
+                      cursor: pointer;
+                    `
+                  : css`
+                      cursor: default;
+                    `
+              )}
+            >
+              {(oneBox.hasOrb && oneBox.orbHideText) ||
+              (oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Top') ? (
+                <span
+                  className={cx(
+                    isBoxBlinking(oneBox) ? styles.blink : '',
+                    styles.orbDefaults,
+                    css`
+                      height: ${oneBox.orbSize}px;
+                      width: ${oneBox.orbSize}px;
+                      background-color: ${getBoxColor(oneBox)};
+                    `
+                  )}
+                  title={getBoxTitleText(oneBox)}
+                ></span>
+              ) : null}
+              {!oneBox.hasOrb || !oneBox.orbHideText ? (
+                <div
+                  className={cx(
+                    css`
+                      font-size: ${oneBox.fontSize}px;
+                      line-heigh: normal;
+                    `
+                  )}
+                >
+                  {oneBox.symbol !== '' &&
+                  !oneBox.colorSymbol &&
+                  oneBox.symbol !== 'text' &&
+                  oneBox.symbol !== 'custom' ? (
+                    <img
+                      srcSet={getTemplateSrv().replace(oneBox.symbol)}
+                      width={oneBox.symbolWidth}
+                      height={oneBox.symbolHeight}
+                    />
+                  ) : null}
+                  {oneBox.symbol !== '' &&
+                  oneBox.colorSymbol &&
+                  oneBox.symbol !== 'text' &&
+                  oneBox.symbol !== 'custom' ? (
+                    <span
+                      className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
+                        css`
+                          height: ${oneBox.symbolHeight}px;
+                          width: ${oneBox.symbolWidth}px;
+                          background: ${getBoxColor(oneBox)};
+                          mask-size: cover;
+                          display: inline-block;
+                          mask: url(${getTemplateSrv().replace(oneBox.symbol)});
+                        `
+                      )}
+                    />
+                  ) : null}
+                  {oneBox.symbol === 'custom' && !oneBox.colorSymbol && oneBox.customSymbol !== '' ? (
+                    <img
+                      srcSet={getTemplateSrv().replace(oneBox.customSymbol)}
+                      width={oneBox.symbolWidth}
+                      height={oneBox.symbolHeight}
+                    />
+                  ) : null}
+                  {oneBox.symbol === 'custom' && oneBox.colorSymbol && oneBox.customSymbol !== '' ? (
+                    <span
+                      className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
+                        css`
+                          height: ${oneBox.symbolHeight}px;
+                          width: ${oneBox.symbolWidth}px;
+                          background: ${getBoxColor(oneBox)};
+                          mask-size: cover;
+                          display: inline-block;
+                          mask: url(${getTemplateSrv().replace(oneBox.customSymbol)});
+                        `
+                      )}
+                    />
+                  ) : null}
+                  {oneBox.symbol === 'text' ? (
+                    <span
+                      className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
+                        styles.alignVertically,
+                        css`
+                          height: ${oneBox.symbolHeight}px;
+                          width: ${oneBox.symbolWidth}px;
+                        `
+                      )}
+                    >
+                      {oneBox.customSymbol}
+                    </span>
+                  ) : null}
+                  {oneBox.hasOrb && oneBox.orbLocation === 'Left' ? (
+                    <span
+                      className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
+                        styles.orbDefaults,
+                        styles.alignVertically,
+                        css`
+                          height: ${oneBox.orbSize}px;
+                          width: ${oneBox.orbSize}px;
+                          background-color: ${getBoxColor(oneBox)};
+                        `
+                      )}
+                      title={getBoxTitleText(oneBox)}
+                    ></span>
+                  ) : null}
 
-                    {!oneBox.onlyShowSymbol && oneBox.prefix ? (
-                      <span
-                        className={cx(
-                          styles.alignVertically,
-                          styles.boxPrefix,
-                          css`
-                            font-size: ${oneBox.prefixSize}px;
-                          `
-                        )}
-                        title={getBoxTitleText(oneBox)}
-                      >
-                        {oneBox.prefix}
-                      </span>
-                    ) : null}
+                  {oneBox.prefix ? (
+                    <span
+                      className={cx(
+                        styles.alignVertically,
+                        styles.boxPrefix,
+                        css`
+                          font-size: ${oneBox.prefixSize}px;
+                        `
+                      )}
+                      title={getBoxTitleText(oneBox)}
+                    >
+                      {oneBox.prefix}
+                    </span>
+                  ) : null}
 
-                    {!oneBox.onlyShowSymbol ? (
-                      <span className={cx(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically)}>
-                        {getBoxText(oneBox)}
-                      </span>
-                    ) : null}
+                  {!oneBox.symbolHideText ? (
+                    <span className={cx(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically)}>
+                      {getBoxText(oneBox)}
+                    </span>
+                  ) : null}
 
-                    {!oneBox.onlyShowSymbol && oneBox.suffix ? (
-                      <span
-                        className={cx(
-                          isBoxBlinking(oneBox) ? styles.blink : '',
-                          styles.alignVertically,
-                          styles.boxSuffix,
-                          css`
-                            font-size: ${oneBox.suffixSize}px;
-                          `
-                        )}
-                        title={getBoxTitleText(oneBox)}
-                      >
-                        {oneBox.suffix}
-                      </span>
-                    ) : null}
+                  {!oneBox.symbolHideText && oneBox.suffix ? (
+                    <span
+                      className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
+                        styles.alignVertically,
+                        styles.boxSuffix,
+                        css`
+                          font-size: ${oneBox.suffixSize}px;
+                        `
+                      )}
+                      title={getBoxTitleText(oneBox)}
+                    >
+                      {oneBox.suffix}
+                    </span>
+                  ) : null}
 
-                    {oneBox.hasOrb && oneBox.orbLocation === 'Right' ? (
-                      <span
-                        className={cx(
-                          isBoxBlinking(oneBox) ? styles.blink : '',
-                          styles.orbDefaults,
-                          styles.alignVertically,
-                          css`
-                            height: ${oneBox.orbSize}px;
-                            width: ${oneBox.orbSize}px;
-                            background-color: ${getBoxColor(oneBox)};
-                          `
-                        )}
-                        title={getBoxTitleText(oneBox)}
-                      ></span>
-                    ) : null}
-                  </div>
-                ) : null}
-                {oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Bottom' ? (
-                  <span
-                    className={cx(
-                      isBoxBlinking(oneBox) ? styles.blink : '',
-                      styles.orbDefaults,
-                      css`
-                        height: ${oneBox.orbSize}px;
-                        width: ${oneBox.orbSize}px;
-                        background-color: ${getBoxColor(oneBox)};
-                      `
-                    )}
-                    title={getBoxTitleText(oneBox)}
-                  ></span>
-                ) : null}
-              </a>
-            ) : null}
+                  {oneBox.hasOrb && oneBox.orbLocation === 'Right' ? (
+                    <span
+                      className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
+                        styles.orbDefaults,
+                        styles.alignVertically,
+                        css`
+                          height: ${oneBox.orbSize}px;
+                          width: ${oneBox.orbSize}px;
+                          background-color: ${getBoxColor(oneBox)};
+                        `
+                      )}
+                      title={getBoxTitleText(oneBox)}
+                    ></span>
+                  ) : null}
+                </div>
+              ) : null}
+              {oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Bottom' ? (
+                <span
+                  className={cx(
+                    isBoxBlinking(oneBox) ? styles.blink : '',
+                    styles.orbDefaults,
+                    css`
+                      height: ${oneBox.orbSize}px;
+                      width: ${oneBox.orbSize}px;
+                      background-color: ${getBoxColor(oneBox)};
+                    `
+                  )}
+                  title={getBoxTitleText(oneBox)}
+                ></span>
+              ) : null}
+            </a>
+            {/* ) : null} */}
 
-            {oneBox.url === '' || isEditMode() ? (
+            {/* {oneBox.url === '' || isEditMode() ? (
               <span className={cx(styles.boxLink)}>
                 {(oneBox.hasOrb && oneBox.orbHideText) ||
                 (oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Top') ? (
@@ -405,7 +405,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
                   ></span>
                 ) : null}
               </span>
-            ) : null}
+            ) : null} */}
           </span>
         ))}
       </div>
@@ -485,7 +485,6 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
       isDrag = true;
 
       $(document).one('mouseup', boxMouseUpHandler.bind(boxMouseUpHandler));
-
       event.preventDefault();
     }
   }

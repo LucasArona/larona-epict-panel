@@ -42,7 +42,7 @@ export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Par
         xpos: oldBox.xpos,
         ypos: oldBox.ypos,
         url: oldBox.URL,
-        onlyShowSymbol: false,
+        symbolHideText: false,
         symbol: '',
         symbolWidth: 32,
         symbolHeight: 32,

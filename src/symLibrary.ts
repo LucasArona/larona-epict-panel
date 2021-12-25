@@ -1,5 +1,7 @@
+import { Symbol } from 'types';
+
 // attention. In the svg files add  preserveAspectRatio="none" to the svg tag to allow non-uniform scale
-export const SymbolsLibrary = [
+export const SymbolsLibrary: Symbol[] = [
   {
     label: 'None',
     value: '',
