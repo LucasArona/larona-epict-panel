@@ -4,7 +4,7 @@ import { SimpleOptions, Box } from 'types';
 import { css, cx } from 'emotion';
 import { stylesFactory } from '@grafana/ui';
 import { getTemplateSrv } from '@grafana/runtime';
-import { getLastNotNullValue } from './Utilities';
+import { getLastNotNullStringValue, getLastNotNullValue } from './Utilities';
 
 interface Props extends PanelProps<SimpleOptions> {}
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
@@ -210,6 +210,24 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
       }
       return true; //Continue iterating
     });
+
+    if (retVal === undefined) {
+      data.series.every((frm: DataFrame) => {
+        let targetField = frm.fields.find(function(f) {
+          const fieldDisplayName = getFieldDisplayName(f, frm);
+          let discoveredField =
+            frm.name === undefined || frm.name === fieldDisplayName
+              ? fieldDisplayName
+              : `${frm.name} (${fieldDisplayName})`;
+          return discoveredField === serieName;
+        });
+        if (targetField !== undefined && targetField !== null) {
+          retVal = getLastNotNullStringValue(targetField);
+          return false; //We found what we were looking for, so stop iterating
+        }
+        return true; //Continue iterating
+      });
+    }
 
     if (retVal === undefined) {
       serie = data.series.find(s => s.name === serieName); /*for backward compatibility*/

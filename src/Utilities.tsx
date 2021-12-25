@@ -15,3 +15,16 @@ export function getLastNotNullValue(fields: Field<any, Vector<any>> | undefined,
   }
   return retVal;
 }
+
+export function getLastNotNullStringValue(fields: Field<any, Vector<any>> | undefined) {
+  let retVal = 'N/A';
+  let lastNotNullValueIndex = fields?.values.length;
+  if (lastNotNullValueIndex) {
+    while (lastNotNullValueIndex-- && fields?.values.get(lastNotNullValueIndex) == null) {} //Find the last non-null value
+    if (lastNotNullValueIndex !== -1) {
+      // If we only have null values, index = -1
+      retVal = fields?.values.get(lastNotNullValueIndex).toString();
+    }
+  }
+  return retVal;
+}
