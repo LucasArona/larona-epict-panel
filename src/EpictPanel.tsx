@@ -19,15 +19,15 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
   return (
     <div
       className={cx(styles.wrapper)}
-      onMouseMove={event => onBoxMouseMove(event)}
-      onClick={event => onBackgroundClick(event)}
+      onMouseMove={(event) => onBoxMouseMove(event)}
+      onClick={(event) => onBackgroundClick(event)}
     >
       <div className={cx(styles.imgWrapper)} id="img-wrapper">
         <img srcSet={processedBgURL} onClick={(event) => onBgClick(event)} />
         {boxes.map((oneBox, index) => (
           <span
-            onMouseDown={event => onBoxMouseDown(event, oneBox)}
-            onClick={event => onBoxMouseClick(event, oneBox)}
+            onMouseDown={(event) => onBoxMouseDown(event, oneBox)}
+            onClick={(event) => onBoxMouseClick(event, oneBox)}
             key={index}
             className={cx(
               styles.box,
@@ -470,7 +470,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
   }
 
   function deselectAllBoxes() {
-    options.boxes.forEach(b => {
+    options.boxes.forEach((b) => {
       b.selected = false;
     });
   }
