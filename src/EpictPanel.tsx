@@ -14,9 +14,10 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   return (
     <div className={cx(styles.wrapper)}>
       <div className={cx(styles.imgWrapper)} id="img-wrapper">
-        <img srcSet={processedBgURL} onClick={event => onBgClick(event)} />
+        <img srcSet={processedBgURL} onClick={(event) => onBgClick(event)} />
         {boxes.map((oneBox, index) => (
           <span
+            key={index}
             className={cx(
               styles.box,
               css`
@@ -195,8 +196,8 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
     let serie = undefined;
 
     data.series.every((frm: DataFrame) => {
-      let numberFields = frm.fields.filter(f => f.type === FieldType.number);
-      let targetField = numberFields.find(function(f) {
+      let numberFields = frm.fields.filter((f) => f.type === FieldType.number);
+      let targetField = numberFields.find(function (f) {
         const fieldDisplayName = getFieldDisplayName(f, frm);
         let discoveredField =
           frm.name === undefined || frm.name === fieldDisplayName
@@ -213,7 +214,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
 
     if (retVal === undefined) {
       data.series.every((frm: DataFrame) => {
-        let targetField = frm.fields.find(function(f) {
+        let targetField = frm.fields.find(function (f) {
           const fieldDisplayName = getFieldDisplayName(f, frm);
           let discoveredField =
             frm.name === undefined || frm.name === fieldDisplayName
@@ -230,8 +231,8 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
     }
 
     if (retVal === undefined) {
-      serie = data.series.find(s => s.name === serieName); /*for backward compatibility*/
-      let fields = serie?.fields.find(f => f.type === 'number');
+      serie = data.series.find((s) => s.name === serieName); /*for backward compatibility*/
+      let fields = serie?.fields.find((f) => f.type === 'number');
       retVal = getLastNotNullValue(fields, decimals);
     }
 

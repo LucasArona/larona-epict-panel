@@ -18,13 +18,13 @@ import {
 } from '@grafana/ui';
 
 export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
-  .setPanelOptions(builder => {
+  .setPanelOptions((builder) => {
     builder.addTextInput({ name: 'Background URL', path: 'bgURL' }).addCustomEditor({
       path: 'boxes',
       name: 'Boxes definitions',
       id: 'boxesDefinitions',
       defaultValue: null,
-      editor: props => {
+      editor: (props) => {
         var ctx = (props as any).context;
         var data = ctx.data;
         var options = ctx.options as SimpleOptions;
@@ -183,8 +183,8 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
 
         let availableSeries: Array<{ value: string; label: string }> = [];
         data.forEach((frm: DataFrame) => {
-          let valuesFields = frm.fields.filter(f => f.type === FieldType.number);
-          valuesFields.forEach(oneValField => {
+          let valuesFields = frm.fields.filter((f) => f.type === FieldType.number);
+          valuesFields.forEach((oneValField) => {
             if (oneValField !== undefined) {
               const fieldDisplayName = getFieldDisplayName(oneValField, frm);
               let discoveredField =
@@ -200,7 +200,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
           <div className="section gf-form-group">
             <h4 className="section-heading">Boxes definitions</h4>
             {options.boxes.map((oneBox, index) => (
-              <div>
+              <div key={index}>
                 <h5>Box #{index}</h5>
                 <div className="section gf-form-group">
                   <HorizontalGroup>
@@ -208,9 +208,9 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                       name="trash-alt"
                       size="xl"
                       surface="panel"
-                      onClick={event => onDeleteBox(event, index)}
+                      onClick={(event) => onDeleteBox(event, index)}
                     />
-                    <IconButton name="copy" size="xl" surface="panel" onClick={event => onCloneBox(event, oneBox)} />
+                    <IconButton name="copy" size="xl" surface="panel" onClick={(event) => onCloneBox(event, oneBox)} />
                   </HorizontalGroup>
                 </div>
                 <div className="section gf-form-group">
@@ -223,15 +223,23 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                       label="Change Metric"
                       icon="exchange-alt"
                       options={availableSeries}
-                      onChange={selectedItem => onBoxSerieUpdated(selectedItem.value, oneBox)}
+                      onChange={(selectedItem) => onBoxSerieUpdated(selectedItem.value, oneBox)}
                       variant="secondary"
                       size="sm"
                     />
                     <Field label="Prefix">
-                      <Input type="text" onChange={event => onBoxPrefixChanged(event, oneBox)} value={oneBox.prefix} />
+                      <Input
+                        type="text"
+                        onChange={(event) => onBoxPrefixChanged(event, oneBox)}
+                        value={oneBox.prefix}
+                      />
                     </Field>
                     <Field label="Suffix">
-                      <Input type="text" onChange={event => onBoxSuffixChanged(event, oneBox)} value={oneBox.suffix} />
+                      <Input
+                        type="text"
+                        onChange={(event) => onBoxSuffixChanged(event, oneBox)}
+                        value={oneBox.suffix}
+                      />
                     </Field>
                   </HorizontalGroup>
                   <HorizontalGroup>
@@ -240,7 +248,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                         <Field label="Prefix size">
                           <Input
                             type="text"
-                            onChange={event => onBoxPrefixFontSizeChanged(event, oneBox)}
+                            onChange={(event) => onBoxPrefixFontSizeChanged(event, oneBox)}
                             value={oneBox.prefixSize}
                           />
                         </Field>
@@ -251,7 +259,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                         <Field label="Suffix size">
                           <Input
                             type="text"
-                            onChange={event => onBoxSuffixFontSizeChanged(event, oneBox)}
+                            onChange={(event) => onBoxSuffixFontSizeChanged(event, oneBox)}
                             value={oneBox.suffixSize}
                           />
                         </Field>
@@ -274,18 +282,18 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                   </Tooltip>
                   <HorizontalGroup>
                     <Field label="X">
-                      <Input type="text" onChange={event => onBoxXposChanged(event, oneBox)} value={oneBox.xpos} />
+                      <Input type="text" onChange={(event) => onBoxXposChanged(event, oneBox)} value={oneBox.xpos} />
                     </Field>
                     <Field label="Y">
-                      <Input type="text" onChange={event => onBoxYposChanged(event, oneBox)} value={oneBox.ypos} />
+                      <Input type="text" onChange={(event) => onBoxYposChanged(event, oneBox)} value={oneBox.ypos} />
                     </Field>
                   </HorizontalGroup>
                   <HorizontalGroup>
                     <Field label="Angle">
-                      <Input type="text" onChange={event => onBoxAngleChanged(event, oneBox)} value={oneBox.angle} />
+                      <Input type="text" onChange={(event) => onBoxAngleChanged(event, oneBox)} value={oneBox.angle} />
                     </Field>
                     <Field label="Link">
-                      <Input type="text" onChange={event => onBoxUrlChanged(event, oneBox)} value={oneBox.url} />
+                      <Input type="text" onChange={(event) => onBoxUrlChanged(event, oneBox)} value={oneBox.url} />
                     </Field>
                   </HorizontalGroup>
                 </div>
@@ -295,14 +303,14 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                     <Field label="Decimal">
                       <Input
                         type="text"
-                        onChange={event => onBoxDecimalChanged(event, oneBox)}
+                        onChange={(event) => onBoxDecimalChanged(event, oneBox)}
                         value={oneBox.decimal}
                       />
                     </Field>
                     <Field label="Font-size">
                       <Input
                         type="text"
-                        onChange={event => onBoxFontsizeChanged(event, oneBox)}
+                        onChange={(event) => onBoxFontsizeChanged(event, oneBox)}
                         value={oneBox.fontSize}
                       />
                     </Field>
@@ -313,7 +321,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                         <Switch
                           value={oneBox.hasOrb}
                           checked={oneBox.hasOrb}
-                          onChange={event => onBoxOrbChanged(event, oneBox)}
+                          onChange={(event) => onBoxOrbChanged(event, oneBox)}
                         />
                       </Field>
                     </div>
@@ -323,7 +331,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                           <Field label="Hide text">
                             <Switch
                               checked={oneBox.orbHideText}
-                              onChange={event => onBoxOrbHideTextChanged(event, oneBox)}
+                              onChange={(event) => onBoxOrbHideTextChanged(event, oneBox)}
                             />
                           </Field>
                         </div>
@@ -333,7 +341,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                               <Field label="Orb Location">
                                 <Select
                                   options={orbLocations}
-                                  onChange={v => onBoxOrbLocationChanged(v, oneBox)}
+                                  onChange={(v) => onBoxOrbLocationChanged(v, oneBox)}
                                   value={oneBox.orbLocation}
                                 />
                               </Field>
@@ -345,7 +353,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                             <Input
                               type="text"
                               value={oneBox.orbSize}
-                              onChange={event => onBoxOrbSizeChanged(event, oneBox)}
+                              onChange={(event) => onBoxOrbSizeChanged(event, oneBox)}
                             />
                           </Field>
                         </div>
@@ -355,7 +363,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                   <HorizontalGroup>
                     <Field label="Use Thresholds">
                       <Switch
-                        onChange={event => onBoxUseThresholdsChanged(event, oneBox)}
+                        onChange={(event) => onBoxUseThresholdsChanged(event, oneBox)}
                         value={oneBox.isUsingThresholds}
                       />
                     </Field>
@@ -376,47 +384,47 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
                         <Field label="Thresholds">
                           <Input
                             type="text"
-                            onChange={event => onBoxThresholdsChanged(event, oneBox)}
+                            onChange={(event) => onBoxThresholdsChanged(event, oneBox)}
                             value={oneBox.thresholds}
                           />
                         </Field>
                         <HorizontalGroup>
                           <ColorPicker
                             color={oneBox.colorLow}
-                            onChange={color => onBoxColorLowChanged(color, oneBox)}
+                            onChange={(color) => onBoxColorLowChanged(color, oneBox)}
                           />
 
                           <ColorPicker
                             color={oneBox.colorMedium}
-                            onChange={color => onBoxColorMediumChanged(color, oneBox)}
+                            onChange={(color) => onBoxColorMediumChanged(color, oneBox)}
                           />
 
                           <ColorPicker
                             color={oneBox.colorHigh}
-                            onChange={color => onBoxColorHighChanged(color, oneBox)}
+                            onChange={(color) => onBoxColorHighChanged(color, oneBox)}
                           />
                         </HorizontalGroup>
                       </>
                     ) : (
                       <Field label="Color">
-                        <ColorPicker color={oneBox.color} onChange={color => onBoxColorChanged(color, oneBox)} />
+                        <ColorPicker color={oneBox.color} onChange={(color) => onBoxColorChanged(color, oneBox)} />
                       </Field>
                     )}
                   </HorizontalGroup>
                   {oneBox.isUsingThresholds ? (
                     <HorizontalGroup>
                       <Field label="Blink if low">
-                        <Switch onChange={event => onBoxBlinkLowChanged(event, oneBox)} value={oneBox.blinkLow} />
+                        <Switch onChange={(event) => onBoxBlinkLowChanged(event, oneBox)} value={oneBox.blinkLow} />
                       </Field>
                       <Field label="Blink if high">
-                        <Switch onChange={event => onBoxBlinkHighChanged(event, oneBox)} value={oneBox.blinkHigh} />
+                        <Switch onChange={(event) => onBoxBlinkHighChanged(event, oneBox)} value={oneBox.blinkHigh} />
                       </Field>
                     </HorizontalGroup>
                   ) : null}
                   {/* <HorizontalGroup>
                     <Field label="Show the background">
                       <Switch
-                        onChange={event => onBoxHasBackgroundChanged(event, oneBox)}
+                        onChange={(event) => onBoxHasBackgroundChanged(event, oneBox)}
                         value={oneBox.hasBackground}
                       />
                     </Field>

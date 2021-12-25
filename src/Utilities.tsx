@@ -7,10 +7,7 @@ export function getLastNotNullValue(fields: Field<any, Vector<any>> | undefined,
     while (lastNotNullValueIndex-- && fields?.values.get(lastNotNullValueIndex) == null) {} //Find the last non-null value
     if (lastNotNullValueIndex !== -1) {
       // If we only have null values, index = -1
-      retVal = fields?.values
-        .get(lastNotNullValueIndex)
-        .toFixed(decimals)
-        .toString();
+      retVal = fields?.values.get(lastNotNullValueIndex).toFixed(decimals).toString();
     }
   }
   return retVal;
