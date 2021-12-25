@@ -20,18 +20,20 @@ import {
 } from '@grafana/ui';
 
 export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
-  .setPanelOptions(builder => {
-    builder
-      .addTextInput({ name: 'Background URL', path: 'bgURL' })
-      .addCustomEditor({
-        path: 'boxes',
-        name: 'Selected Box',
-        id: 'selectedBox',
-        defaultValue: null,
-        editor: props => {
-          var ctx = (props as any).context;
-          var data = ctx.data;
-          var options = ctx.options as SimpleOptions;
+.setPanelOptions((builder) => {
+    builder.addTextInput({ name: 'Background URL', path: 'bgURL' }).addCustomEditor({
+      path: 'boxes',
+      name: 'Boxes definitions',
+      id: 'boxesDefinitions',
+      defaultValue: null,
+      editor: (props) => {
+        var ctx = (props as any).context;
+        var data = ctx.data;
+        var options = ctx.options as SimpleOptions;
+        if (options.boxes == null) {
+          options.boxes = [];
+        }
+        const onAddBoxBtnClicked = ({ target }: any) => {
           if (options.boxes == null) {
             options.boxes = [];
           }
@@ -179,19 +181,19 @@ export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
             { label: 'Right', value: 'Right' },
           ];
 
-          let availableSeries: Array<{ value: string; label: string }> = [];
-          data.forEach((frm: DataFrame) => {
-            let valuesFields = frm.fields.filter(f => f.type === FieldType.number);
-            valuesFields.forEach(oneValField => {
-              if (oneValField !== undefined) {
-                const fieldDisplayName = getFieldDisplayName(oneValField, frm);
-                let discoveredField =
-                  frm.name === undefined || frm.name === fieldDisplayName
-                    ? fieldDisplayName
-                    : `${frm.name} (${fieldDisplayName})`;
-                availableSeries.push({ value: discoveredField, label: discoveredField });
-              }
-            });
+
+        let availableSeries: Array<{ value: string; label: string }> = [];
+        data.forEach((frm: DataFrame) => {
+          let valuesFields = frm.fields.filter((f) => f.type === FieldType.number);
+          valuesFields.forEach((oneValField) => {
+            if (oneValField !== undefined) {
+              const fieldDisplayName = getFieldDisplayName(oneValField, frm);
+              let discoveredField =
+                frm.name === undefined || frm.name === fieldDisplayName
+                  ? fieldDisplayName
+                  : `${frm.name} (${fieldDisplayName})`;
+              availableSeries.push({ value: discoveredField, label: discoveredField });
+            }
           });
 
           return (

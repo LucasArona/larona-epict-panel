@@ -1,6 +1,6 @@
 {
   "name": "larona-epict-panel",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Enter the URL of the image you want, and add some metrics on it.",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -15,9 +15,9 @@
     "url": "https://github.com/LucasArona/larona-epict-panel/issues"
   },
   "devDependencies": {
-    "@grafana/data": "7.0.0",
-    "@grafana/toolkit": "7.0.0",
-    "@grafana/ui": "7.0.0",
+    "@grafana/data": "^8",
+    "@grafana/toolkit": "^8",
+    "@grafana/ui": "^8",
     "emotion": "10.0.27"
   },
   "engines": {
@@ -25,5 +25,9 @@
   },
   "dependencies": {
     "@grafana/runtime": "^7.0.1"
+  },
+  "resolutions": {
+    "immer": "^9.0.6",
+    "glob-parent": "^5.1.2"
   }
 }
