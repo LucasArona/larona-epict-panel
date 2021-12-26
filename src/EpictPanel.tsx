@@ -25,6 +25,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
       <div className={cx(styles.imgWrapper)} id="img-wrapper">
         <img srcSet={processedBgURL} onClick={(event) => onBgClick(event)} />
         {boxes.map((oneBox, index) => (
+          /*start one box processing*/
           <span
             onMouseDown={(event) => onBoxMouseDown(event, oneBox)}
             onClick={(event) => onBoxMouseClick(event, oneBox)}
@@ -37,9 +38,15 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
                 color: ${getBoxColor(oneBox)};
                 transform: rotate(${oneBox.angle}deg);
               `,
+              oneBox.hasBackground
+                ? css`
+                    background-color: ${oneBox.backgroundColor};
+                  `
+                : '',
               isEditMode() && oneBox.selected ? styles.selectedBoxOutline : ''
             )}
           >
+            {/*do not add href on the link while in edit mode because this will prevent the dragging of the box*/}
             <a
               {...(oneBox.url && !isEditMode() ? { href: getTemplateSrv().replace(oneBox.url) } : null)}
               className={cx(
@@ -203,6 +210,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
               ) : null}
             </a>
           </span>
+          /*end one box processing*/
         ))}
       </div>
     </div>

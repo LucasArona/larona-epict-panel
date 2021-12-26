@@ -163,14 +163,14 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
     box.customSymbol = target.value;
     onChange(options.boxes);
   };
-  // const onBoxHasBackgroundChanged = ({ target }: any, box: Box) => {
-  //   box.hasBackground = target.checked;
-  //   onChange(options.boxes);
-  // };
-  // const onBoxBackgroundColorChanged = (color: string, box: Box) => {
-  //   box.backgroundColor = color;
-  //   onChange(options.boxes);
-  // };
+  const onBoxHasBackgroundChanged = ({ target }: any, box: Box) => {
+    box.hasBackground = target.checked;
+    onChange(options.boxes);
+  };
+  const onBoxBackgroundColorChanged = (color: string, box: Box) => {
+    box.backgroundColor = color;
+    onChange(options.boxes);
+  };
   const onBoxUseThresholdsChanged = ({ target }: any, box: Box) => {
     box.isUsingThresholds = target.checked;
     onChange(options.boxes);
@@ -290,13 +290,12 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
         </CollapsableSection>
         <CollapsableSection label="Position and Link" isOpen={true}>
           <div className="section gf-form-group">
-            <h5 className="section-heading">Position and Link</h5>
             <Tooltip
               theme="info"
               content={
                 <p>
                   You can easily find the coordinates if you <code>ctrl</code>+<code>left click</code>
-                  anywhere on your image
+                  anywhere on your image. You can also drag and drop the box on the image.
                 </p>
               }
             >
@@ -444,7 +443,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
             </HorizontalGroup>
           </div>
         </CollapsableSection>
-        <CollapsableSection label="Font-size, decimal, thresholds" isOpen={false}>
+        <CollapsableSection label="Font-size, decimal, thresholds, background" isOpen={false}>
           <div className="section gf-form-group">
             <HorizontalGroup>
               <Field label="Decimal">
@@ -514,24 +513,21 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                 </Field>
               </HorizontalGroup>
             ) : null}
-            {/* <HorizontalGroup>
-          <Field label="Show the background">
-            <Switch
-              onChange={event => onBoxHasBackgroundChanged(event, oneBox)}
-              value={oneBox.hasBackground}
-            />
-          </Field>
-          {oneBox.hasBackground ? (
             <HorizontalGroup>
-              <Field label="Color">
-                <ColorPicker
-                  color={oneBox.backgroundColor}
-                  onChange={color => onBoxBackgroundColorChanged(color, oneBox)}
-                />
+              <Field label="Show the background">
+                <Switch onChange={(event) => onBoxHasBackgroundChanged(event, oneBox)} value={oneBox.hasBackground} />
               </Field>
+              {oneBox.hasBackground ? (
+                <HorizontalGroup>
+                  <Field label="Color">
+                    <ColorPicker
+                      color={oneBox.backgroundColor}
+                      onChange={(color) => onBoxBackgroundColorChanged(color, oneBox)}
+                    />
+                  </Field>
+                </HorizontalGroup>
+              ) : null}
             </HorizontalGroup>
-          ) : null}
-        </HorizontalGroup> */}
           </div>
         </CollapsableSection>
         <hr />

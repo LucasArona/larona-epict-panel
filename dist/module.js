@@ -147,54 +147,59 @@ var SimplePanel = function SimplePanel(_a) {
       return onBgClick(event);
     }
   }), boxes.map(function (oneBox, index) {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      onMouseDown: function onMouseDown(event) {
-        return onBoxMouseDown(event, oneBox);
-      },
-      onClick: function onClick(event) {
-        return onBoxMouseClick(event, oneBox);
-      },
-      key: index,
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.box, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_1 || (templateObject_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                top: ", "px;\n                left: ", "px;\n                color: ", ";\n                transform: rotate(", "deg);\n              "], ["\n                top: ", "px;\n                left: ", "px;\n                color: ", ";\n                transform: rotate(", "deg);\n              "])), oneBox.ypos, oneBox.xpos, getBoxColor(oneBox), oneBox.angle), isEditMode() && oneBox.selected ? styles.selectedBoxOutline : '')
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, oneBox.url && !isEditMode() ? {
-      href: Object(_grafana_runtime__WEBPACK_IMPORTED_MODULE_5__["getTemplateSrv"])().replace(oneBox.url)
-    } : null, {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.boxLink, oneBox.url ? Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_2 || (templateObject_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      cursor: pointer;\n                    "], ["\n                      cursor: pointer;\n                    "]))) : Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_3 || (templateObject_3 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      cursor: default;\n                    "], ["\n                      cursor: default;\n                    "]))))
-    }), oneBox.hasOrb && oneBox.orbHideText || oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Top' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.orbDefaults, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_4 || (templateObject_4 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      height: ", "px;\n                      width: ", "px;\n                      background-color: ", ";\n                    "], ["\n                      height: ", "px;\n                      width: ", "px;\n                      background-color: ", ";\n                    "])), oneBox.orbSize, oneBox.orbSize, getBoxColor(oneBox))),
-      title: getBoxTitleText(oneBox)
-    }) : null, !oneBox.hasOrb || !oneBox.orbHideText ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_5 || (templateObject_5 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      font-size: ", "px;\n                      line-heigh: normal;\n                    "], ["\n                      font-size: ", "px;\n                      line-heigh: normal;\n                    "])), oneBox.fontSize))
-    }, oneBox.hasSymbol && !oneBox.colorSymbol && oneBox.symbol !== 'custom' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-      srcSet: oneBox.symbol,
-      width: oneBox.symbolWidth,
-      height: oneBox.symbolHeight
-    }) : null, oneBox.hasSymbol && oneBox.colorSymbol && oneBox.symbol !== 'custom' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_6 || (templateObject_6 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          height: ", "px;\n                          width: ", "px;\n                          background: ", ";\n                          mask-size: cover;\n                          display: inline-block;\n                          mask: url(", ");\n                        "], ["\n                          height: ", "px;\n                          width: ", "px;\n                          background: ", ";\n                          mask-size: cover;\n                          display: inline-block;\n                          mask: url(", ");\n                        "])), oneBox.symbolHeight, oneBox.symbolWidth, getBoxColor(oneBox), oneBox.symbol))
-    }) : null, oneBox.symbol === 'custom' && !oneBox.colorSymbol && oneBox.customSymbol !== '' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-      srcSet: Object(_grafana_runtime__WEBPACK_IMPORTED_MODULE_5__["getTemplateSrv"])().replace(oneBox.customSymbol),
-      width: oneBox.symbolWidth,
-      height: oneBox.symbolHeight
-    }) : null, oneBox.symbol === 'custom' && oneBox.colorSymbol && oneBox.customSymbol !== '' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_7 || (templateObject_7 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          height: ", "px;\n                          width: ", "px;\n                          background: ", ";\n                          mask-size: cover;\n                          display: inline-block;\n                          mask: url(", ");\n                        "], ["\n                          height: ", "px;\n                          width: ", "px;\n                          background: ", ";\n                          mask-size: cover;\n                          display: inline-block;\n                          mask: url(", ");\n                        "])), oneBox.symbolHeight, oneBox.symbolWidth, getBoxColor(oneBox), Object(_grafana_runtime__WEBPACK_IMPORTED_MODULE_5__["getTemplateSrv"])().replace(oneBox.customSymbol)))
-    }) : null, oneBox.hasOrb && oneBox.orbLocation === 'Left' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.orbDefaults, styles.alignVertically, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_8 || (templateObject_8 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          height: ", "px;\n                          width: ", "px;\n                          background-color: ", ";\n                        "], ["\n                          height: ", "px;\n                          width: ", "px;\n                          background-color: ", ";\n                        "])), oneBox.orbSize, oneBox.orbSize, getBoxColor(oneBox))),
-      title: getBoxTitleText(oneBox)
-    }) : null, oneBox.prefix ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.alignVertically, styles.boxPrefix, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_9 || (templateObject_9 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          font-size: ", "px;\n                        "], ["\n                          font-size: ", "px;\n                        "])), oneBox.prefixSize)),
-      title: getBoxTitleText(oneBox)
-    }, oneBox.prefix) : null, !oneBox.symbolHideText ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically)
-    }, getBoxText(oneBox)) : null, !oneBox.symbolHideText && oneBox.suffix ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically, styles.boxSuffix, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_10 || (templateObject_10 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          font-size: ", "px;\n                        "], ["\n                          font-size: ", "px;\n                        "])), oneBox.suffixSize)),
-      title: getBoxTitleText(oneBox)
-    }, oneBox.suffix) : null, oneBox.hasOrb && oneBox.orbLocation === 'Right' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.orbDefaults, styles.alignVertically, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_11 || (templateObject_11 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          height: ", "px;\n                          width: ", "px;\n                          background-color: ", ";\n                        "], ["\n                          height: ", "px;\n                          width: ", "px;\n                          background-color: ", ";\n                        "])), oneBox.orbSize, oneBox.orbSize, getBoxColor(oneBox))),
-      title: getBoxTitleText(oneBox)
-    }) : null) : null, oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Bottom' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.orbDefaults, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_12 || (templateObject_12 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      height: ", "px;\n                      width: ", "px;\n                      background-color: ", ";\n                    "], ["\n                      height: ", "px;\n                      width: ", "px;\n                      background-color: ", ";\n                    "])), oneBox.orbSize, oneBox.orbSize, getBoxColor(oneBox))),
-      title: getBoxTitleText(oneBox)
-    }) : null));
+    return (
+      /*start one box processing*/
+      react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        onMouseDown: function onMouseDown(event) {
+          return onBoxMouseDown(event, oneBox);
+        },
+        onClick: function onClick(event) {
+          return onBoxMouseClick(event, oneBox);
+        },
+        key: index,
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.box, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_1 || (templateObject_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                top: ", "px;\n                left: ", "px;\n                color: ", ";\n                transform: rotate(", "deg);\n              "], ["\n                top: ", "px;\n                left: ", "px;\n                color: ", ";\n                transform: rotate(", "deg);\n              "])), oneBox.ypos, oneBox.xpos, getBoxColor(oneBox), oneBox.angle), oneBox.hasBackground ? Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_2 || (templateObject_2 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                    background-color: ", ";\n                  "], ["\n                    background-color: ", ";\n                  "])), oneBox.backgroundColor) : '', isEditMode() && oneBox.selected ? styles.selectedBoxOutline : '')
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"])({}, oneBox.url && !isEditMode() ? {
+        href: Object(_grafana_runtime__WEBPACK_IMPORTED_MODULE_5__["getTemplateSrv"])().replace(oneBox.url)
+      } : null, {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.boxLink, oneBox.url ? Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_3 || (templateObject_3 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      cursor: pointer;\n                    "], ["\n                      cursor: pointer;\n                    "]))) : Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_4 || (templateObject_4 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      cursor: default;\n                    "], ["\n                      cursor: default;\n                    "]))))
+      }), oneBox.hasOrb && oneBox.orbHideText || oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Top' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.orbDefaults, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_5 || (templateObject_5 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      height: ", "px;\n                      width: ", "px;\n                      background-color: ", ";\n                    "], ["\n                      height: ", "px;\n                      width: ", "px;\n                      background-color: ", ";\n                    "])), oneBox.orbSize, oneBox.orbSize, getBoxColor(oneBox))),
+        title: getBoxTitleText(oneBox)
+      }) : null, !oneBox.hasOrb || !oneBox.orbHideText ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_6 || (templateObject_6 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      font-size: ", "px;\n                      line-heigh: normal;\n                    "], ["\n                      font-size: ", "px;\n                      line-heigh: normal;\n                    "])), oneBox.fontSize))
+      }, oneBox.hasSymbol && !oneBox.colorSymbol && oneBox.symbol !== 'custom' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        srcSet: oneBox.symbol,
+        width: oneBox.symbolWidth,
+        height: oneBox.symbolHeight
+      }) : null, oneBox.hasSymbol && oneBox.colorSymbol && oneBox.symbol !== 'custom' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_7 || (templateObject_7 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          height: ", "px;\n                          width: ", "px;\n                          background: ", ";\n                          mask-size: cover;\n                          display: inline-block;\n                          mask: url(", ");\n                        "], ["\n                          height: ", "px;\n                          width: ", "px;\n                          background: ", ";\n                          mask-size: cover;\n                          display: inline-block;\n                          mask: url(", ");\n                        "])), oneBox.symbolHeight, oneBox.symbolWidth, getBoxColor(oneBox), oneBox.symbol))
+      }) : null, oneBox.symbol === 'custom' && !oneBox.colorSymbol && oneBox.customSymbol !== '' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        srcSet: Object(_grafana_runtime__WEBPACK_IMPORTED_MODULE_5__["getTemplateSrv"])().replace(oneBox.customSymbol),
+        width: oneBox.symbolWidth,
+        height: oneBox.symbolHeight
+      }) : null, oneBox.symbol === 'custom' && oneBox.colorSymbol && oneBox.customSymbol !== '' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_8 || (templateObject_8 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          height: ", "px;\n                          width: ", "px;\n                          background: ", ";\n                          mask-size: cover;\n                          display: inline-block;\n                          mask: url(", ");\n                        "], ["\n                          height: ", "px;\n                          width: ", "px;\n                          background: ", ";\n                          mask-size: cover;\n                          display: inline-block;\n                          mask: url(", ");\n                        "])), oneBox.symbolHeight, oneBox.symbolWidth, getBoxColor(oneBox), Object(_grafana_runtime__WEBPACK_IMPORTED_MODULE_5__["getTemplateSrv"])().replace(oneBox.customSymbol)))
+      }) : null, oneBox.hasOrb && oneBox.orbLocation === 'Left' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.orbDefaults, styles.alignVertically, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_9 || (templateObject_9 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          height: ", "px;\n                          width: ", "px;\n                          background-color: ", ";\n                        "], ["\n                          height: ", "px;\n                          width: ", "px;\n                          background-color: ", ";\n                        "])), oneBox.orbSize, oneBox.orbSize, getBoxColor(oneBox))),
+        title: getBoxTitleText(oneBox)
+      }) : null, oneBox.prefix ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(styles.alignVertically, styles.boxPrefix, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_10 || (templateObject_10 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          font-size: ", "px;\n                        "], ["\n                          font-size: ", "px;\n                        "])), oneBox.prefixSize)),
+        title: getBoxTitleText(oneBox)
+      }, oneBox.prefix) : null, !oneBox.symbolHideText ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically)
+      }, getBoxText(oneBox)) : null, !oneBox.symbolHideText && oneBox.suffix ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically, styles.boxSuffix, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_11 || (templateObject_11 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          font-size: ", "px;\n                        "], ["\n                          font-size: ", "px;\n                        "])), oneBox.suffixSize)),
+        title: getBoxTitleText(oneBox)
+      }, oneBox.suffix) : null, oneBox.hasOrb && oneBox.orbLocation === 'Right' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.orbDefaults, styles.alignVertically, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_12 || (templateObject_12 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                          height: ", "px;\n                          width: ", "px;\n                          background-color: ", ";\n                        "], ["\n                          height: ", "px;\n                          width: ", "px;\n                          background-color: ", ";\n                        "])), oneBox.orbSize, oneBox.orbSize, getBoxColor(oneBox))),
+        title: getBoxTitleText(oneBox)
+      }) : null) : null, oneBox.hasOrb && !oneBox.orbHideText && oneBox.orbLocation === 'Bottom' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["cx"])(isBoxBlinking(oneBox) ? styles.blink : '', styles.orbDefaults, Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_13 || (templateObject_13 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n                      height: ", "px;\n                      width: ", "px;\n                      background-color: ", ";\n                    "], ["\n                      height: ", "px;\n                      width: ", "px;\n                      background-color: ", ";\n                    "])), oneBox.orbSize, oneBox.orbSize, getBoxColor(oneBox))),
+        title: getBoxTitleText(oneBox)
+      }) : null))
+      /*end one box processing*/
+
+    );
   })));
 
   function isBoxBlinking(box) {
@@ -376,19 +381,19 @@ var isEditMode = function isEditMode() {
 
 var getStyles = Object(_grafana_ui__WEBPACK_IMPORTED_MODULE_4__["stylesFactory"])(function () {
   return {
-    wrapper: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_13 || (templateObject_13 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      display: flex;\n      justify-content: center;\n      height: 100%;\n    "], ["\n      display: flex;\n      justify-content: center;\n      height: 100%;\n    "]))),
-    imgWrapper: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_14 || (templateObject_14 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      position: relative;\n    "], ["\n      position: relative;\n    "]))),
-    box: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_15 || (templateObject_15 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      position: absolute;\n    "], ["\n      position: absolute;\n    "]))),
-    boxLink: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_16 || (templateObject_16 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      display: inline-block;\n      text-align: center;\n      color: unset;\n      &:hover {\n        color: unset;\n      }\n      &:focus {\n        color: unset;\n      }\n    "], ["\n      display: inline-block;\n      text-align: center;\n      color: unset;\n      &:hover {\n        color: unset;\n      }\n      &:focus {\n        color: unset;\n      }\n    "]))),
-    orbDefaults: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_17 || (templateObject_17 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      border-radius: 50%;\n      border-style: solid;\n      border-width: thin;\n      border-color: #000;\n      display: inline-block;\n      font-size: 0px;\n    "], ["\n      border-radius: 50%;\n      border-style: solid;\n      border-width: thin;\n      border-color: #000;\n      display: inline-block;\n      font-size: 0px;\n    "]))),
-    blink: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_18 || (templateObject_18 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      animation: blink_anim 0.8s linear infinite;\n      @keyframes blink_anim {\n        50% {\n          opacity: 0.2;\n        }\n      }\n    "], ["\n      animation: blink_anim 0.8s linear infinite;\n      @keyframes blink_anim {\n        50% {\n          opacity: 0.2;\n        }\n      }\n    "]))),
-    alignVertically: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_19 || (templateObject_19 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      display: inline-block;\n      white-space: normal;\n      vertical-align: middle;\n    "], ["\n      display: inline-block;\n      white-space: normal;\n      vertical-align: middle;\n    "]))),
-    boxPrefix: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_20 || (templateObject_20 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      white-space: pre;\n      margin-right: 0.5ch;\n    "], ["\n      white-space: pre;\n      margin-right: 0.5ch;\n    "]))),
-    boxSuffix: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_21 || (templateObject_21 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      white-space: pre;\n      margin-right: 0.5ch;\n    "], ["\n      white-space: pre;\n      margin-right: 0.5ch;\n    "]))),
-    selectedBoxOutline: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_22 || (templateObject_22 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      border-radius: 15px;\n      outline: dotted;'\n    "], ["\n      border-radius: 15px;\n      outline: dotted;'\n    "])))
+    wrapper: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_14 || (templateObject_14 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      display: flex;\n      justify-content: center;\n      height: 100%;\n    "], ["\n      display: flex;\n      justify-content: center;\n      height: 100%;\n    "]))),
+    imgWrapper: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_15 || (templateObject_15 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      position: relative;\n    "], ["\n      position: relative;\n    "]))),
+    box: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_16 || (templateObject_16 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      position: absolute;\n    "], ["\n      position: absolute;\n    "]))),
+    boxLink: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_17 || (templateObject_17 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      display: inline-block;\n      text-align: center;\n      color: unset;\n      &:hover {\n        color: unset;\n      }\n      &:focus {\n        color: unset;\n      }\n    "], ["\n      display: inline-block;\n      text-align: center;\n      color: unset;\n      &:hover {\n        color: unset;\n      }\n      &:focus {\n        color: unset;\n      }\n    "]))),
+    orbDefaults: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_18 || (templateObject_18 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      border-radius: 50%;\n      border-style: solid;\n      border-width: thin;\n      border-color: #000;\n      display: inline-block;\n      font-size: 0px;\n    "], ["\n      border-radius: 50%;\n      border-style: solid;\n      border-width: thin;\n      border-color: #000;\n      display: inline-block;\n      font-size: 0px;\n    "]))),
+    blink: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_19 || (templateObject_19 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      animation: blink_anim 0.8s linear infinite;\n      @keyframes blink_anim {\n        50% {\n          opacity: 0.2;\n        }\n      }\n    "], ["\n      animation: blink_anim 0.8s linear infinite;\n      @keyframes blink_anim {\n        50% {\n          opacity: 0.2;\n        }\n      }\n    "]))),
+    alignVertically: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_20 || (templateObject_20 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      display: inline-block;\n      white-space: normal;\n      vertical-align: middle;\n    "], ["\n      display: inline-block;\n      white-space: normal;\n      vertical-align: middle;\n    "]))),
+    boxPrefix: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_21 || (templateObject_21 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      white-space: pre;\n      margin-right: 0.5ch;\n    "], ["\n      white-space: pre;\n      margin-right: 0.5ch;\n    "]))),
+    boxSuffix: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_22 || (templateObject_22 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      white-space: pre;\n      margin-right: 0.5ch;\n    "], ["\n      white-space: pre;\n      margin-right: 0.5ch;\n    "]))),
+    selectedBoxOutline: Object(emotion__WEBPACK_IMPORTED_MODULE_3__["css"])(templateObject_23 || (templateObject_23 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"])(["\n      border-radius: 15px;\n      outline: dotted;'\n    "], ["\n      border-radius: 15px;\n      outline: dotted;'\n    "])))
   };
 });
-var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12, templateObject_13, templateObject_14, templateObject_15, templateObject_16, templateObject_17, templateObject_18, templateObject_19, templateObject_20, templateObject_21, templateObject_22;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9, templateObject_10, templateObject_11, templateObject_12, templateObject_13, templateObject_14, templateObject_15, templateObject_16, templateObject_17, templateObject_18, templateObject_19, templateObject_20, templateObject_21, templateObject_22, templateObject_23;
 
 /***/ }),
 
@@ -735,15 +740,18 @@ var BoxesEditor = function BoxesEditor(_a) {
     var target = _a.target;
     box.customSymbol = target.value;
     onChange(options.boxes);
-  }; // const onBoxHasBackgroundChanged = ({ target }: any, box: Box) => {
-  //   box.hasBackground = target.checked;
-  //   onChange(options.boxes);
-  // };
-  // const onBoxBackgroundColorChanged = (color: string, box: Box) => {
-  //   box.backgroundColor = color;
-  //   onChange(options.boxes);
-  // };
+  };
 
+  var onBoxHasBackgroundChanged = function onBoxHasBackgroundChanged(_a, box) {
+    var target = _a.target;
+    box.hasBackground = target.checked;
+    onChange(options.boxes);
+  };
+
+  var onBoxBackgroundColorChanged = function onBoxBackgroundColorChanged(color, box) {
+    box.backgroundColor = color;
+    onChange(options.boxes);
+  };
 
   var onBoxUseThresholdsChanged = function onBoxUseThresholdsChanged(_a, box) {
     var target = _a.target;
@@ -903,11 +911,9 @@ var BoxesEditor = function BoxesEditor(_a) {
       isOpen: true
     }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
       className: "section gf-form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("h5", {
-      className: "section-heading"
-    }, "Position and Link"), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["Tooltip"], {
+    }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["Tooltip"], {
       theme: "info",
-      content: react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("p", null, "You can easily find the coordinates if you ", react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("code", null, "ctrl"), "+", react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("code", null, "left click"), "anywhere on your image")
+      content: react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("p", null, "You can easily find the coordinates if you ", react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("code", null, "ctrl"), "+", react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("code", null, "left click"), "anywhere on your image. You can also drag and drop the box on the image.")
     }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["Icon"], {
       name: "info-circle"
     })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["HorizontalGroup"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["Field"], {
@@ -1048,7 +1054,7 @@ var BoxesEditor = function BoxesEditor(_a) {
         return onBoxOrbSizeChanged(event, oneBox);
       }
     })))) : null))), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["CollapsableSection"], {
-      label: "Font-size, decimal, thresholds",
+      label: "Font-size, decimal, thresholds, background",
       isOpen: false
     }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
       className: "section gf-form-group"
@@ -1123,7 +1129,21 @@ var BoxesEditor = function BoxesEditor(_a) {
         return onBoxBlinkHighChanged(event, oneBox);
       },
       value: oneBox.blinkHigh
-    }))) : null)), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("hr", null));
+    }))) : null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["HorizontalGroup"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["Field"], {
+      label: "Show the background"
+    }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["Switch"], {
+      onChange: function onChange(event) {
+        return onBoxHasBackgroundChanged(event, oneBox);
+      },
+      value: oneBox.hasBackground
+    })), oneBox.hasBackground ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["HorizontalGroup"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["Field"], {
+      label: "Color"
+    }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_3__["ColorPicker"], {
+      color: oneBox.backgroundColor,
+      onChange: function onChange(color) {
+        return onBoxBackgroundColorChanged(color, oneBox);
+      }
+    }))) : null))), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("hr", null));
   };
 
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
