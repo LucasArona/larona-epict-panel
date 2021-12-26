@@ -30,8 +30,9 @@ export interface Box {
   orbHideText: boolean;
   orbLocation: OrbLocations;
   url: string;
-  symbolHideText: boolean;
+  hasSymbol: boolean;
   symbol: string;
+  symbolHideText: boolean;
   symbolWidth: number;
   symbolHeight: number;
   symbolDefWidth: number;

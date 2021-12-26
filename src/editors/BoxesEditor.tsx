@@ -56,8 +56,9 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
       xpos: 0,
       ypos: 0,
       url: '',
-      symbolHideText: false,
+      hasSymbol: false,
       symbol: '',
+      symbolHideText: false,
       symbolWidth: 32,
       symbolHeight: 32,
       symbolDefHeight: 32,
@@ -133,7 +134,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
     box.orbLocation = location.value;
     onChange(options.boxes);
   };
-  const onBoxOnlySymbolChanged = ({ target }: any, box: Box) => {
+  const onBoxSymbolHideTextChanged = ({ target }: any, box: Box) => {
     box.symbolHideText = target.checked;
     onChange(options.boxes);
   };
@@ -143,6 +144,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
   };
   const onBoxSymbolChanged = (symbol: any, box: Box) => {
     box.symbol = symbol.value;
+    box.hasSymbol = symbol.value !== '';
     box.symbolDefWidth = symbol.width;
     box.symbolWidth = symbol.width * symbol.factor;
     box.symbolDefHeight = symbol.height;
@@ -351,19 +353,6 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                 </HorizontalGroup>
               </>
             ) : null}
-            {oneBox.symbol === 'text' ? (
-              <>
-                <HorizontalGroup>
-                  <Field label="Static text">
-                    <Input
-                      type="text"
-                      onChange={(event) => onBoxCustomSymbolChanged(event, oneBox)}
-                      value={oneBox.customSymbol}
-                    />
-                  </Field>
-                </HorizontalGroup>
-              </>
-            ) : null}
             {oneBox.symbol !== '' ? (
               <>
                 <HorizontalGroup>
@@ -390,7 +379,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                   <Switch
                     value={oneBox.symbolHideText}
                     checked={oneBox.symbolHideText}
-                    onChange={(event) => onBoxOnlySymbolChanged(event, oneBox)}
+                    onChange={(event) => onBoxSymbolHideTextChanged(event, oneBox)}
                   />
                 </Field>
               </div>
