@@ -30,6 +30,24 @@ export interface Box {
   orbHideText: boolean;
   orbLocation: OrbLocations;
   url: string;
+  hasSymbol: boolean;
+  symbol: string;
+  symbolHideText: boolean;
+  symbolWidth: number;
+  symbolHeight: number;
+  symbolDefWidth: number;
+  symbolDefHeight: number;
+  colorSymbol: boolean;
+  customSymbol: string;
+  selected: boolean;
 }
 
 export type OrbLocations = 'Top' | 'Bottom' | 'Left' | 'Right';
+
+export type Symbol = {
+  label: string;
+  value: string;
+  width: number;
+  height: number;
+  factor: number;
+};

@@ -1,22 +1,34 @@
 import React from 'react';
-import { DataFrame, FieldType, getFieldDisplayName, PanelProps } from '@grafana/data';
+import { DataFrame, FieldType, getFieldDisplayName, PanelProps, urlUtil } from '@grafana/data';
 import { SimpleOptions, Box } from 'types';
 import { css, cx } from 'emotion';
 import { stylesFactory } from '@grafana/ui';
 import { getTemplateSrv } from '@grafana/runtime';
 import { getLastNotNullStringValue, getLastNotNullValue } from './Utilities';
 
+declare let $: any;
+
 interface Props extends PanelProps<SimpleOptions> {}
-export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
+export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, width, height }) => {
   let processedBgURL = getTemplateSrv().replace(options.bgURL);
   let boxes = options.boxes;
+  let boxMouseUpHandler = () => {
+    onBoxMouseUp();
+  };
   const styles = getStyles();
   return (
-    <div className={cx(styles.wrapper)}>
+    <div
+      className={cx(styles.wrapper)}
+      onMouseMove={(event) => onBoxMouseMove(event)}
+      onClick={(event) => onBackgroundClick(event)}
+    >
       <div className={cx(styles.imgWrapper)} id="img-wrapper">
         <img srcSet={processedBgURL} onClick={(event) => onBgClick(event)} />
         {boxes.map((oneBox, index) => (
+          /*start one box processing*/
           <span
+            onMouseDown={(event) => onBoxMouseDown(event, oneBox)}
+            onClick={(event) => onBoxMouseClick(event, oneBox)}
             key={index}
             className={cx(
               styles.box,
@@ -25,11 +37,18 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
                 left: ${oneBox.xpos}px;
                 color: ${getBoxColor(oneBox)};
                 transform: rotate(${oneBox.angle}deg);
-              `
+              `,
+              oneBox.hasBackground
+                ? css`
+                    background-color: ${oneBox.backgroundColor};
+                  `
+                : '',
+              isEditMode() && oneBox.selected ? styles.selectedBoxOutline : ''
             )}
           >
+            {/*do not add href on the link while in edit mode because this will prevent the dragging of the box*/}
             <a
-              href={oneBox.url ? getTemplateSrv().replace(oneBox.url) : '#'}
+              {...(oneBox.url && !isEditMode() ? { href: getTemplateSrv().replace(oneBox.url) } : null)}
               className={cx(
                 styles.boxLink,
                 oneBox.url
@@ -65,6 +84,46 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
                     `
                   )}
                 >
+                  {oneBox.hasSymbol && !oneBox.colorSymbol && oneBox.symbol !== 'custom' ? (
+                    <img srcSet={oneBox.symbol} width={oneBox.symbolWidth} height={oneBox.symbolHeight} />
+                  ) : null}
+                  {oneBox.hasSymbol && oneBox.colorSymbol && oneBox.symbol !== 'custom' ? (
+                    <span
+                      className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
+                        css`
+                          height: ${oneBox.symbolHeight}px;
+                          width: ${oneBox.symbolWidth}px;
+                          background: ${getBoxColor(oneBox)};
+                          mask-size: cover;
+                          display: inline-block;
+                          mask: url(${oneBox.symbol});
+                        `
+                      )}
+                    />
+                  ) : null}
+                  {oneBox.symbol === 'custom' && !oneBox.colorSymbol && oneBox.customSymbol !== '' ? (
+                    <img
+                      srcSet={getTemplateSrv().replace(oneBox.customSymbol)}
+                      width={oneBox.symbolWidth}
+                      height={oneBox.symbolHeight}
+                    />
+                  ) : null}
+                  {oneBox.symbol === 'custom' && oneBox.colorSymbol && oneBox.customSymbol !== '' ? (
+                    <span
+                      className={cx(
+                        isBoxBlinking(oneBox) ? styles.blink : '',
+                        css`
+                          height: ${oneBox.symbolHeight}px;
+                          width: ${oneBox.symbolWidth}px;
+                          background: ${getBoxColor(oneBox)};
+                          mask-size: cover;
+                          display: inline-block;
+                          mask: url(${getTemplateSrv().replace(oneBox.customSymbol)});
+                        `
+                      )}
+                    />
+                  ) : null}
                   {oneBox.hasOrb && oneBox.orbLocation === 'Left' ? (
                     <span
                       className={cx(
@@ -96,11 +155,13 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
                     </span>
                   ) : null}
 
-                  <span className={cx(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically)}>
-                    {getBoxText(oneBox)}
-                  </span>
+                  {!oneBox.symbolHideText ? (
+                    <span className={cx(isBoxBlinking(oneBox) ? styles.blink : '', styles.alignVertically)}>
+                      {getBoxText(oneBox)}
+                    </span>
+                  ) : null}
 
-                  {oneBox.suffix ? (
+                  {!oneBox.symbolHideText && oneBox.suffix ? (
                     <span
                       className={cx(
                         isBoxBlinking(oneBox) ? styles.blink : '',
@@ -149,6 +210,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
               ) : null}
             </a>
           </span>
+          /*end one box processing*/
         ))}
       </div>
     </div>
@@ -188,6 +250,64 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   }
   function getBoxText(box: Box): string {
     return getBoxValue(box.serie, box.decimal);
+  }
+
+  function onBoxMouseClick(event: any, box: Box) {
+    if (isEditMode() && event.button === 0) {
+      inBox = true;
+      deselectAllBoxes();
+
+      box.selected = true;
+
+      onOptionsChange(options);
+    }
+  }
+
+  function onBackgroundClick(event: any) {
+    if (isEditMode() && event.button === 0 && !inBox) {
+      deselectAllBoxes();
+
+      onOptionsChange(options);
+    }
+
+    inBox = false;
+  }
+
+  function deselectAllBoxes() {
+    options.boxes.forEach((b) => {
+      b.selected = false;
+    });
+  }
+
+  function onBoxMouseDown(event: any, box: Box) {
+    if (isEditMode() && event.button === 0) {
+      dragBox = box;
+      oldX = box.xpos * 1;
+      oldY = box.ypos * 1;
+      oldMX = event.clientX * 1;
+      oldMY = event.clientY * 1;
+      isDrag = true;
+
+      $(document).one('mouseup', boxMouseUpHandler.bind(boxMouseUpHandler));
+      event.preventDefault();
+    }
+  }
+
+  function onBoxMouseMove(event: any) {
+    if (isDrag && isEditMode()) {
+      let offX = event.clientX - oldMX;
+      let offY = event.clientY - oldMY;
+
+      dragBox.xpos = oldX + offX;
+      dragBox.ypos = oldY + offY;
+
+      onOptionsChange(options);
+    }
+  }
+
+  function onBoxMouseUp() {
+    $(document).unbind('mouseup', boxMouseUpHandler.bind(boxMouseUpHandler));
+    isDrag = false;
   }
 
   function getBoxValue(serieName: string, decimals: number): string {
@@ -249,11 +369,29 @@ let onBgClick = (event: any) => {
   }
 };
 
+//global variables
+//Drag Box variables
+let dragBox: Box;
+let isDrag: boolean;
+let oldX: number;
+let oldY: number;
+let oldMX: number;
+let oldMY: number;
+let inBox: boolean;
+
+let isEditMode = () => {
+  const params = urlUtil.getUrlSearchParams();
+  let editMode = params.editPanel != null;
+
+  return editMode;
+};
+
 const getStyles = stylesFactory(() => {
   return {
     wrapper: css`
       display: flex;
       justify-content: center;
+      height: 100%;
     `,
     imgWrapper: css`
       position: relative;
@@ -300,6 +438,10 @@ const getStyles = stylesFactory(() => {
     boxSuffix: css`
       white-space: pre;
       margin-right: 0.5ch;
+    `,
+    selectedBoxOutline: css`
+      border-radius: 15px;
+      outline: dotted;'
     `,
   };
 });
