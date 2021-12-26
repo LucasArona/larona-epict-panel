@@ -8,12 +8,20 @@ import { BoxesEditor } from 'editors/BoxesEditor';
 
 export const plugin = new PanelPlugin<SimpleOptions>(EpictPanel)
   .setPanelOptions((builder) => {
-    builder.addTextInput({ name: 'Background URL', path: 'bgURL' }).addCustomEditor({
-      path: 'boxes',
-      name: 'Boxes definitions',
-      id: 'boxesDefinitions',
-      defaultValue: null,
-      editor: BoxesEditor,
-    });
+    builder
+      .addTextInput({ name: 'Background URL', path: 'bgURL' })
+      .addBooleanSwitch({
+        name: 'Autoscale',
+        path: 'autoScale',
+        description: 'Determines if the panel should automatically scale down its content to fit the view',
+        defaultValue: false,
+      })
+      .addCustomEditor({
+        path: 'boxes',
+        name: 'Boxes definitions',
+        id: 'boxesDefinitions',
+        defaultValue: null,
+        editor: BoxesEditor,
+      });
   })
   .setMigrationHandler(MigHandler);

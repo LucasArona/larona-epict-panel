@@ -1,6 +1,7 @@
 export interface SimpleOptions {
   bgURL: string;
   boxes: Box[];
+  autoScale: boolean;
 }
 
 export interface Box {

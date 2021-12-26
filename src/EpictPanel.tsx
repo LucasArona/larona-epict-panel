@@ -11,19 +11,98 @@ declare let $: any;
 interface Props extends PanelProps<SimpleOptions> {}
 export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, width, height }) => {
   let processedBgURL = getTemplateSrv().replace(options.bgURL);
+  let hRatio = 1;
+  let wRatio = 1;
   let boxes = options.boxes;
   let boxMouseUpHandler = () => {
     onBoxMouseUp();
   };
+  let mainImgRef: React.RefObject<HTMLImageElement> = React.createRef();
+
+  let onMainImageLoaded = () => {
+    processImageScaleFactor();
+  };
+
+  function processImageScaleFactor() {
+    if (mainImgRef !== null && mainImgRef.current?.complete) {
+      let img = mainImgRef.current;
+      if (options.autoScale === true) {
+        hRatio = img.height / img.naturalHeight;
+        wRatio = img.width / img.naturalWidth;
+
+        if (hRatio <= 1 && wRatio <= 1 && !isEditMode()) {
+          if (img.parentElement !== null) {
+            let boxesInDOM = img.parentElement.querySelectorAll('.oneBox');
+            if (boxesInDOM !== undefined) {
+              for (let index = 0; index < boxesInDOM.length; index++) {
+                let oneBox: HTMLSpanElement = boxesInDOM[index] as HTMLSpanElement;
+
+                /* Creating a new div is required, otherwise the transformOrigin will destroy the
+                 * rotate transformOrigin (if the user wants to rotate the box)
+                 */
+
+                let boxParent = oneBox.parentNode;
+                let scalingDiv = undefined;
+
+                if (boxParent !== null && (boxParent as HTMLDivElement)?.className === 'scalingDiv') {
+                  scalingDiv = boxParent as HTMLDivElement; //scalingDiv is already existing
+                } else {
+                  //Create a new scaling div
+                  scalingDiv = document.createElement('div');
+                  scalingDiv.className = 'scalingDiv';
+                  boxParent?.replaceChild(scalingDiv, oneBox);
+                  scalingDiv.appendChild(oneBox);
+                  //scaling div is now the parent element of oneBox
+                }
+
+                if (scalingDiv !== null) {
+                  scalingDiv.style.position = 'absolute';
+                  scalingDiv.style.top = `${boxes[index].ypos * hRatio}px`;
+                  scalingDiv.style.left = `${boxes[index].xpos * wRatio}px`;
+                  scalingDiv.style.transform = `scale(${wRatio},${hRatio})`;
+                  scalingDiv.style.transformOrigin = `top left`;
+                  scalingDiv.style.whiteSpace = 'no-wrap';
+                }
+              }
+            }
+          }
+        }
+      } else if (img.parentElement !== null && img.parentElement?.querySelector('.scalingDiv') !== null) {
+        //Panel was autoscaled before. Now the user wants to remove the autoscaling, so we need to remove the scalingDiv
+        let boxesInDOM = img.parentElement.querySelectorAll('.oneBox');
+        if (boxesInDOM !== undefined) {
+          for (let index = 0; index < boxesInDOM.length; index++) {
+            let oneBox = boxesInDOM[index] as HTMLSpanElement;
+            let boxParent = oneBox.parentNode;
+            if (boxParent !== null && (boxParent as HTMLSpanElement).className === 'scalingDiv') {
+              unwrap(boxParent);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    /* useEffect allows to call the function when rendering is complete */
+    processImageScaleFactor();
+  });
   const styles = getStyles();
+
   return (
     <div
       className={cx(styles.wrapper)}
       onMouseMove={(event) => onBoxMouseMove(event)}
       onClick={(event) => onBackgroundClick(event)}
     >
-      <div className={cx(styles.imgWrapper)} id="img-wrapper">
-        <img srcSet={processedBgURL} onClick={(event) => onBgClick(event)} />
+      <div className={cx(styles.imgWrapper, 'img-wrapper')}>
+        <img
+          srcSet={processedBgURL}
+          onClick={(event) => onBgClick(event)}
+          className={!isEditMode() && options.autoScale === true ? cx(styles.bgImgScale) : undefined}
+          ref={mainImgRef}
+          onLoad={onMainImageLoaded}
+        />
         {boxes.map((oneBox, index) => (
           /*start one box processing*/
           <span
@@ -31,12 +110,19 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
             onClick={(event) => onBoxMouseClick(event, oneBox)}
             key={index}
             className={cx(
-              styles.box,
+              'oneBox',
               css`
-                top: ${oneBox.ypos}px;
-                left: ${oneBox.xpos}px;
+                ${
+                  options.autoScale === false || isEditMode()
+                    ? `
+                    position: absolute;
+                    top:${oneBox.ypos}px;
+                    left: ${oneBox.xpos}px;`
+                    : undefined /*If autoscale is enabled, top and left are set by the autoscale function*/
+                }
                 color: ${getBoxColor(oneBox)};
                 transform: rotate(${oneBox.angle}deg);
+                display: block;
               `,
               oneBox.hasBackground
                 ? css`
@@ -386,6 +472,21 @@ let isEditMode = () => {
   return editMode;
 };
 
+/**
+ * Unwrap the childrens out of the parent element,
+ * and deletes de parent element
+ * @param parentElement Parent Element to remove
+ */
+let unwrap = (parentElement: Node) => {
+  const parent = parentElement.parentNode;
+  if (parent !== null) {
+    while (parentElement.firstChild) {
+      parent.insertBefore(parentElement.firstChild, parentElement);
+    }
+    parent.removeChild(parentElement);
+  }
+};
+
 const getStyles = stylesFactory(() => {
   return {
     wrapper: css`
@@ -395,9 +496,13 @@ const getStyles = stylesFactory(() => {
     `,
     imgWrapper: css`
       position: relative;
+      overflow: scroll;
     `,
-    box: css`
-      position: absolute;
+    bgImgScale: css`
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: scale-down;
+      object-position: top left;
     `,
     boxLink: css`
       display: inline-block;

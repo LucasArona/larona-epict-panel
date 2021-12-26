@@ -2,6 +2,7 @@ import { PanelModel } from '@grafana/data';
 import { SimpleOptions } from 'types';
 
 class Opts implements SimpleOptions {
+  autoScale!: boolean;
   bgURL!: string;
   boxes!: Array<import('./types').Box>;
 }
@@ -11,6 +12,7 @@ export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Par
     //We found boxes to upgrade from an old plugin
     console.log('Migrating from an older version', panel);
     const options: SimpleOptions = new Opts();
+    options.autoScale = false;
     options.bgURL = panel.bgURL;
     options.boxes = [];
     panel.boxes.forEach((oldBox: any) => {
