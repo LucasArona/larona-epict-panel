@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.5
+
+- New feature: You can enable Autoscale in the panel options to automatically shrink its content when there's not enough space on screen.
+- New feature: Boxes can be rearranged by drag and drop.
+- New feature: You can show a SVG symbol inside a box
+- New feature: Boxes can show text values (previously, only numeric values were shown)
+- New feature: You can show a background color behind a box
+
 ## v2.0.4
 
 - Fixes an issue that prevented new installation of recent versions of the plugin on Grafana v8

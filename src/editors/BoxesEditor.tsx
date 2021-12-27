@@ -245,7 +245,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
           <div className="section gf-form-group">
             <HorizontalGroup>
               <Field label="Name">
-                <Input type="text" readOnly={true} value={oneBox.serie} width={16} />
+                <Input type="text" readOnly={true} value={oneBox.serie} width={16} css={undefined} />
               </Field>
               <ValuePicker
                 label="Change Metric"
@@ -256,10 +256,20 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                 size="sm"
               />
               <Field label="Prefix">
-                <Input type="text" onChange={(event) => onBoxPrefixChanged(event, oneBox)} value={oneBox.prefix} />
+                <Input
+                  type="text"
+                  onChange={(event) => onBoxPrefixChanged(event, oneBox)}
+                  value={oneBox.prefix}
+                  css={undefined}
+                />
               </Field>
               <Field label="Suffix">
-                <Input type="text" onChange={(event) => onBoxSuffixChanged(event, oneBox)} value={oneBox.suffix} />
+                <Input
+                  type="text"
+                  onChange={(event) => onBoxSuffixChanged(event, oneBox)}
+                  value={oneBox.suffix}
+                  css={undefined}
+                />
               </Field>
             </HorizontalGroup>
             <HorizontalGroup>
@@ -270,6 +280,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                       type="number"
                       onChange={(event) => onBoxPrefixFontSizeChanged(event, oneBox)}
                       value={oneBox.prefixSize}
+                      css={undefined}
                     />
                   </Field>
                 </>
@@ -281,6 +292,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                       type="number"
                       onChange={(event) => onBoxSuffixFontSizeChanged(event, oneBox)}
                       value={oneBox.suffixSize}
+                      css={undefined}
                     />
                   </Field>
                 </>
@@ -303,18 +315,38 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
             </Tooltip>
             <HorizontalGroup>
               <Field label="X">
-                <Input type="number" onChange={(event) => onBoxXposChanged(event, oneBox)} value={oneBox.xpos} />
+                <Input
+                  type="number"
+                  onChange={(event) => onBoxXposChanged(event, oneBox)}
+                  value={oneBox.xpos}
+                  css={undefined}
+                />
               </Field>
               <Field label="Y">
-                <Input type="number" onChange={(event) => onBoxYposChanged(event, oneBox)} value={oneBox.ypos} />
+                <Input
+                  type="number"
+                  onChange={(event) => onBoxYposChanged(event, oneBox)}
+                  value={oneBox.ypos}
+                  css={undefined}
+                />
               </Field>
             </HorizontalGroup>
             <HorizontalGroup>
               <Field label="Angle">
-                <Input type="number" onChange={(event) => onBoxAngleChanged(event, oneBox)} value={oneBox.angle} />
+                <Input
+                  type="number"
+                  onChange={(event) => onBoxAngleChanged(event, oneBox)}
+                  value={oneBox.angle}
+                  css={undefined}
+                />
               </Field>
               <Field label="Link">
-                <Input type="text" onChange={(event) => onBoxUrlChanged(event, oneBox)} value={oneBox.url} />
+                <Input
+                  type="text"
+                  onChange={(event) => onBoxUrlChanged(event, oneBox)}
+                  value={oneBox.url}
+                  css={undefined}
+                />
               </Field>
             </HorizontalGroup>
           </div>
@@ -347,6 +379,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                       type="text"
                       onChange={(event) => onBoxCustomSymbolChanged(event, oneBox)}
                       value={oneBox.customSymbol}
+                      css={undefined}
                     />
                   </Field>
                 </HorizontalGroup>
@@ -360,6 +393,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                       type="number"
                       onChange={(event) => onBoxSymbolWidthChanged(event, oneBox)}
                       value={oneBox.symbolWidth}
+                      css={undefined}
                     />
                   </Field>
                   <Field label="Symbol height">
@@ -367,6 +401,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                       type="number"
                       onChange={(event) => onBoxSymbolHeightChanged(event, oneBox)}
                       value={oneBox.symbolHeight}
+                      css={undefined}
                     />
                   </Field>
                 </HorizontalGroup>
@@ -379,6 +414,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                     value={oneBox.symbolHideText}
                     checked={oneBox.symbolHideText}
                     onChange={(event) => onBoxSymbolHideTextChanged(event, oneBox)}
+                    css={undefined}
                   />
                 </Field>
               </div>
@@ -388,6 +424,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                     value={oneBox.colorSymbol}
                     checked={oneBox.colorSymbol}
                     onChange={(event) => onBoxColorSymbolChanged(event, oneBox)}
+                    css={undefined}
                   />
                 </Field>
               </div>
@@ -403,6 +440,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                     value={oneBox.hasOrb}
                     checked={oneBox.hasOrb}
                     onChange={(event) => onBoxOrbChanged(event, oneBox)}
+                    css={undefined}
                   />
                 </Field>
               </div>
@@ -413,6 +451,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                       <Switch
                         checked={oneBox.orbHideText}
                         onChange={(event) => onBoxOrbHideTextChanged(event, oneBox)}
+                        css={undefined}
                       />
                     </Field>
                   </div>
@@ -435,6 +474,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                         type="number"
                         value={oneBox.orbSize}
                         onChange={(event) => onBoxOrbSizeChanged(event, oneBox)}
+                        css={undefined}
                       />
                     </Field>
                   </div>
@@ -443,17 +483,23 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
             </HorizontalGroup>
           </div>
         </CollapsableSection>
-        <CollapsableSection label="Font-size, decimal, thresholds, background" isOpen={false}>
+        <CollapsableSection label="Font, decimal, thresholds, background" isOpen={false}>
           <div className="section gf-form-group">
             <HorizontalGroup>
               <Field label="Decimal">
-                <Input type="number" onChange={(event) => onBoxDecimalChanged(event, oneBox)} value={oneBox.decimal} />
+                <Input
+                  type="number"
+                  onChange={(event) => onBoxDecimalChanged(event, oneBox)}
+                  value={oneBox.decimal}
+                  css={undefined}
+                />
               </Field>
               <Field label="Font-size">
                 <Input
                   type="number"
                   onChange={(event) => onBoxFontsizeChanged(event, oneBox)}
                   value={oneBox.fontSize}
+                  css={undefined}
                 />
               </Field>
             </HorizontalGroup>
@@ -463,6 +509,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                 <Switch
                   onChange={(event) => onBoxUseThresholdsChanged(event, oneBox)}
                   value={oneBox.isUsingThresholds}
+                  css={undefined}
                 />
               </Field>
               {oneBox.isUsingThresholds ? (
@@ -484,6 +531,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                       type="text"
                       onChange={(event) => onBoxThresholdsChanged(event, oneBox)}
                       value={oneBox.thresholds}
+                      css={undefined}
                     />
                   </Field>
                   <HorizontalGroup>
@@ -506,16 +554,28 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
             {oneBox.isUsingThresholds ? (
               <HorizontalGroup>
                 <Field label="Blink if low">
-                  <Switch onChange={(event) => onBoxBlinkLowChanged(event, oneBox)} value={oneBox.blinkLow} />
+                  <Switch
+                    onChange={(event) => onBoxBlinkLowChanged(event, oneBox)}
+                    value={oneBox.blinkLow}
+                    css={undefined}
+                  />
                 </Field>
                 <Field label="Blink if high">
-                  <Switch onChange={(event) => onBoxBlinkHighChanged(event, oneBox)} value={oneBox.blinkHigh} />
+                  <Switch
+                    onChange={(event) => onBoxBlinkHighChanged(event, oneBox)}
+                    value={oneBox.blinkHigh}
+                    css={undefined}
+                  />
                 </Field>
               </HorizontalGroup>
             ) : null}
             <HorizontalGroup>
               <Field label="Show the background">
-                <Switch onChange={(event) => onBoxHasBackgroundChanged(event, oneBox)} value={oneBox.hasBackground} />
+                <Switch
+                  onChange={(event) => onBoxHasBackgroundChanged(event, oneBox)}
+                  value={oneBox.hasBackground}
+                  css={undefined}
+                />
               </Field>
               {oneBox.hasBackground ? (
                 <HorizontalGroup>
