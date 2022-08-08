@@ -16,12 +16,12 @@
   },
   "devDependencies": {
     "@grafana/data": "~8.2.3",
-    "@grafana/toolkit": "~8.0.0",
-    "@grafana/ui": "~8.0.0",
+    "@grafana/toolkit": "~8.5.10",
+    "@grafana/ui": "~8.5.10",
     "emotion": "10.0.27"
   },
   "engines": {
-    "node": ">=12 <13"
+    "node": ">=12 <17"
   },
   "dependencies": {
     "@grafana/runtime": "^8.0.0"
