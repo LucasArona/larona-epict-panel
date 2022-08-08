@@ -15,7 +15,7 @@
     "url": "https://github.com/LucasArona/larona-epict-panel/issues"
   },
   "devDependencies": {
-    "@grafana/data": "~8.0.0",
+    "@grafana/data": "~8.2.3",
     "@grafana/toolkit": "~8.0.0",
     "@grafana/ui": "~8.0.0",
     "emotion": "10.0.27"
