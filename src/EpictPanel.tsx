@@ -2,7 +2,6 @@ import React from 'react';
 import { DataFrame, FieldType, getFieldDisplayName, PanelProps, urlUtil } from '@grafana/data';
 import { SimpleOptions, Box } from 'types';
 import { css, cx } from 'emotion';
-import { stylesFactory } from '@grafana/ui';
 import { getTemplateSrv } from '@grafana/runtime';
 import { getLastNotNullStringValue, getLastNotNullValue } from './Utilities';
 
@@ -398,10 +397,10 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
 
   function getBoxValue(serieName: string, decimals: number): string {
     let retVal = undefined;
-
     let serie = undefined;
 
     data.series.every((frm: DataFrame) => {
+      //Start by processing "number" fields only, to be able to show the value with numeric formatting (decimals, etc.)
       let numberFields = frm.fields.filter((f) => f.type === FieldType.number);
       let targetField = numberFields.find(function (f) {
         const fieldDisplayName = getFieldDisplayName(f, frm);
@@ -419,6 +418,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
     });
 
     if (retVal === undefined) {
+      //No matching frames
       data.series.every((frm: DataFrame) => {
         let targetField = frm.fields.find(function (f) {
           const fieldDisplayName = getFieldDisplayName(f, frm);
@@ -487,17 +487,20 @@ let unwrap = (parentElement: Node) => {
   }
 };
 
-const getStyles = stylesFactory(() => {
+const getStyles = () => {
   return {
     wrapper: css`
       display: flex;
       justify-content: center;
       height: 100%;
     `,
-    imgWrapper: css`
+    imgWrapper: css(`
       position: relative;
       overflow: scroll;
-    `,
+      &::-webkit-scrollbar-corner{
+        background-color:transparent;
+      }
+    `),
     bgImgScale: css`
       max-width: 100%;
       max-height: 100%;
@@ -549,4 +552,4 @@ const getStyles = stylesFactory(() => {
       outline: dotted;'
     `,
   };
-});
+};
