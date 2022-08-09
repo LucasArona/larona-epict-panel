@@ -128,6 +128,11 @@ export const SimplePanel: React.FC<Props> = ({ options, data, onOptionsChange, w
                     background-color: ${oneBox.backgroundColor};
                   `
                 : '',
+              oneBox.hasBorder
+                ? css`
+                    border: ${oneBox.borderWidth ?? 1}px solid ${oneBox.borderColor};
+                  `
+                : '',
               isEditMode() && oneBox.selected ? styles.selectedBoxOutline : ''
             )}
           >

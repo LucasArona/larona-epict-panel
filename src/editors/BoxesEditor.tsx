@@ -13,6 +13,7 @@ import {
   Switch,
   Tooltip,
   ValuePicker,
+  VerticalGroup,
 } from '@grafana/ui';
 import React from 'react';
 import { SymbolsLibrary } from 'symLibrary';
@@ -65,6 +66,9 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
       symbolDefWidth: 32,
       colorSymbol: false,
       customSymbol: '',
+      hasBorder: false,
+      borderColor: '#fff',
+      borderWidth: 1,
       selected: false,
     });
     onChange(options.boxes);
@@ -539,6 +543,50 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
                     />
                   </Field>
                 </HorizontalGroup>
+              ) : null}
+            </HorizontalGroup>
+          </div>
+        </CollapsableSection>
+        <CollapsableSection label="Border" isOpen={false}>
+          <div className="section gf-form-group">
+            <HorizontalGroup>
+              <div className="width-16">
+                <Field label="Show border" description="Add a border around your box">
+                  <Switch
+                    value={oneBox.hasBorder}
+                    checked={oneBox.hasBorder}
+                    onChange={(event) => {
+                      oneBox.hasBorder = event.currentTarget.checked;
+                      onChange(options.boxes);
+                    }}
+                  />
+                </Field>
+              </div>
+              {oneBox.hasBorder ? (
+                <>
+                  <VerticalGroup>
+                    <Field label="Border width" description="Width of the border in px">
+                      <Input
+                        type="number"
+                        value={oneBox.borderWidth}
+                        min={0}
+                        onChange={(event) => {
+                          oneBox.borderWidth = parseInt(event.currentTarget.value, 10) || 0;
+                          onChange(options.boxes);
+                        }}
+                      />
+                    </Field>
+                    <Field label="Color">
+                      <ColorPicker
+                        color={oneBox.borderColor}
+                        onChange={(color) => {
+                          oneBox.borderColor = color;
+                          onChange(options.boxes);
+                        }}
+                      />
+                    </Field>
+                  </VerticalGroup>
+                </>
               ) : null}
             </HorizontalGroup>
           </div>
