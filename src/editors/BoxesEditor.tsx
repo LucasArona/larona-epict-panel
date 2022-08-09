@@ -1,4 +1,4 @@
-import { DataFrame, FieldType, getFieldDisplayName, StandardEditorProps } from '@grafana/data';
+import { DataFrame, FieldType, getFieldDisplayName, SelectableValue, StandardEditorProps } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 import {
   Button,
@@ -214,7 +214,7 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
     { label: 'Right', value: 'Right' },
   ];
 
-  let availableSeries: Array<{ value: string; label: string }> = [];
+  let availableSeries: SelectableValue[] = [];
   data.forEach((frm: DataFrame) => {
     let valuesFields = frm.fields.filter((f) => f.type === FieldType.number || f.type === FieldType.string);
     valuesFields.forEach((oneValField) => {
@@ -224,7 +224,20 @@ export const BoxesEditor: React.FC<StandardEditorProps> = ({ item, value, onChan
           frm.name === undefined || frm.name === fieldDisplayName
             ? fieldDisplayName
             : `${frm.name} (${fieldDisplayName})`;
-        availableSeries.push({ value: discoveredField, label: discoveredField });
+        let listItemIcon = undefined;
+        let listItemTitle = undefined;
+
+        if (options?.boxes?.filter((b) => b.serie === discoveredField).length > 0) {
+          //Detects if the user is already using this serie on another box, to show a hint in the value selector
+          listItemIcon = 'eye';
+          listItemTitle = 'You are using this serie at least once in this panel';
+        }
+        availableSeries.push({
+          value: discoveredField,
+          label: discoveredField,
+          icon: listItemIcon,
+          title: listItemTitle,
+        });
       }
     });
   });
