@@ -28,11 +28,11 @@
       }
     ],
     "screenshots": [],
-    "version": "2.0.5",
-    "updated": "2022-08-08"
+    "version": "2.0.6",
+    "updated": "2023-04-16"
   },
   "dependencies": {
-    "grafanaDependency": ">=8.x.x",
+    "grafanaDependency": ">=8.5.x",
     "plugins": []
   }
 }

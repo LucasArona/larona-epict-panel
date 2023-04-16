@@ -40,6 +40,9 @@ export interface Box {
   symbolDefHeight: number;
   colorSymbol: boolean;
   customSymbol: string;
+  hasBorder: boolean;
+  borderWidth: number;
+  borderColor: string;
   selected: boolean;
 }
 

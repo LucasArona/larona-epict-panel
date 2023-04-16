@@ -53,6 +53,9 @@ export const MigHandler = (panel: PanelModel<Partial<SimpleOptions>> | any): Par
         symbolDefHeight: 32,
         colorSymbol: false,
         customSymbol: '',
+        hasBorder: false,
+        borderColor: '#fff',
+        borderWidth: 1,
         selected: false,
       });
     });

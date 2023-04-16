@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.6
+
+- Fixes an issue where values formatted as string were not shown.
+- Fixes an issue that caused a white square to appear in the bottom right corner of the panel.
+- New feature: You can now show a border around the boxes.
+- New feature: When choosing a metric, a hint will be displayed so that you can easily see which metric you are already using in your panel.
+
 ## v2.0.5
 
 - New feature: You can enable Autoscale in the panel options to automatically shrink its content when there's not enough space on screen.
